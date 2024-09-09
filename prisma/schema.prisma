@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Pizza {
+  id          String       @id @default(cuid())
+  name        String
+  description String
+  imageUrl    String
+  sizes       PizzaSize[]
+  ingredients Ingredient[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  categories  Category[]
+}
+
+model PizzaSize {
+  id        String   @id @default(cuid())
+  size      Size
+  price     Int
+  pizza     Pizza    @relation(fields: [pizzaId], references: [id])
+  pizzaId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Ingredient {
+  id        String   @id @default(cuid())
+  name      String
+  imageUrl  String
+  price     Int
+  pizzas    Pizza[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Size {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum Category {
+  MEAT
+  SPICY
+  SWEET
+  VEGAN
+  CHICKEN
+}

@@ -1,0 +1,53 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	transition: all 0.25s ease-in-out;
+	padding: 15px;
+	border-radius: 10px;
+	height: fit-content;
+}
+.cardName {
+	font-weight: 600;
+	font-size: 20px;
+	margin-bottom: 7px;
+}
+.cardDescription {
+	font-size: 14px;
+	margin-bottom: 13px;
+	line-height: 21px;
+	height: 105px;
+}
+.imgBlock {
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 25px;
+	position: relative;
+}
+.priceBlock {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.card:hover {
+	box-shadow: rgba(14, 14, 14, 0.308) 0px 4px 12px;
+}
+.addBtn {
+	width: 125px;
+	height: 42px;
+	& span {
+		font-size: 14px;
+	}
+}
+.imgSkeleton {
+	position: absolute;
+	top: 0px;
+	left: 32px;
+	z-index: 10;
+	width: 200px;
+	height: 200px;
+	border-radius: 110px;
+	transition: all 0.3s ease-in-out;
+	/* opacity: 0.3; */
+}

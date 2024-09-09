@@ -1,0 +1,21 @@
+body {
+	width: 100vw;
+	font-weight: 400;
+	min-height: 100vh;
+	font-size: 16px;
+	line-height: 22px;
+	--accent-color: #f4511e;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	scroll-behavior: smooth;
+}
+
+.container {
+	max-width: 1270px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+
+.modal-open {
+	overflow-y: hidden;
+}

@@ -1,0 +1,10 @@
+.priceFilters {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.inputsBlock {
+	display: flex;
+	gap: 15px;
+}

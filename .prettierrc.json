@@ -1,0 +1,16 @@
+{
+	"semi": false,
+	"arrowParens": "avoid",
+	"printWidth": 120,
+	"useTabs": true,
+	"singleAttributePerLine": true,
+	"importOrder": [
+		"^@core/(.*)$",
+		"<THIRD_PARTY_MODULES>",
+		"^@server/(.*)$",
+		"^@/constants/(.*)$",
+		"^@ui/(.*)$",
+		"^[./]"
+	],
+	"plugins": ["@trivago/prettier-plugin-sort-imports"]
+}
