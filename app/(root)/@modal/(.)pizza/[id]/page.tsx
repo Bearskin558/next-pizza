@@ -1,10 +1,9 @@
-import { getAllPizzas } from "@/app/api/fetch/getAllPizzas"
+import { getPizzaById } from "@/app/api/fetch/pizza"
 import PizzaModal from "@/shared/components/PizzaModal/PizzaModal"
 
 const PizzaModalIntercepting = async ({ params }: { params: { id: string } }) => {
-	const pizzas = (await getAllPizzas()).data
-	const currentPizza = pizzas.find(pizza => pizza.id === params.id)
-	if (currentPizza) return <PizzaModal pizza={currentPizza} />
+	const pizza = (await getPizzaById(params.id)).data
+	if (pizza) return <PizzaModal pizza={pizza} />
 }
 
 export default PizzaModalIntercepting

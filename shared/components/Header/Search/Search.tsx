@@ -1,8 +1,8 @@
 "use client"
 
+import { searchPizzas } from "@/app/api/fetch/pizza"
 import { usePizzasStore } from "@/shared/store/pizzasStore"
 import { Pizza } from "@/types/pizzas"
-import { toFilterPizzasBySearchValue } from "@/utils/toFilterPizzasBySearchValue"
 import { TextInput } from "@mantine/core"
 import { useToggle } from "@siberiacancode/reactuse"
 import clsx from "clsx"
@@ -16,23 +16,25 @@ const Search = () => {
 	const [isFocused, toggleIsFocused] = useToggle([false, true])
 	const [searchValue, setSearchValue] = useState("")
 	const [filteredPizzas, setFilteredPizzas] = useState<Pizza[]>([])
-	const pizzas = usePizzasStore(state => state.pizzas)
-
 	const blurClassName = clsx(styles.blur, { [styles.onFocus]: isFocused })
+
+	const debounceSearchPizzas = useCallback(
+		debounce(async (searchValue: string) => {
+			const pizzas = (await searchPizzas(searchValue)).data
+			console.log(pizzas)
+			setFilteredPizzas(pizzas)
+		}, 300),
+		[],
+	)
+
+	const onChangeHandler = (value: string) => {
+		setSearchValue(value)
+		debounceSearchPizzas(value)
+	}
 
 	useEffect(() => {
 		isFocused ? document?.body.classList.add("modal-open") : document?.body.classList.remove("modal-open")
 	}, [isFocused])
-
-	const debounceToFilterPizzas = useCallback((pizzas: Pizza[], searchValue: string) => {
-		const pizzasFiltered = toFilterPizzasBySearchValue(pizzas, searchValue)
-		setFilteredPizzas(pizzasFiltered!)
-	}, [])
-
-	const onChangeHandler = (searchValue: string) => {
-		setSearchValue(searchValue)
-		debounceToFilterPizzas(pizzas, searchValue)
-	}
 
 	return (
 		<div className={styles.wrapper}>
@@ -55,7 +57,7 @@ const Search = () => {
 			<div
 				className={blurClassName}
 				onClick={() => toggleIsFocused(false)}
-			></div>
+			/>
 		</div>
 	)
 }
