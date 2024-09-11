@@ -40,7 +40,7 @@ const PizzasCard = ({ pizza }: Props) => {
 					от <span>{pizza.sizes[0].price}</span> ₽
 				</Text>
 				<Link
-					href={`/pizza/${pizza.id}`}
+					href={`/pizzas/${pizza.id}`}
 					scroll={false}
 				>
 					<Button

@@ -7,10 +7,20 @@ export async function GET(request: NextRequest) {
 	const queryValue = request.nextUrl.searchParams.get("query") || ""
 	const pizzas = await prisma.pizza.findMany({
 		where: {
-			name: {
-				contains: queryValue,
-				mode: "insensitive",
-			},
+			OR: [
+				{
+					name: {
+						contains: queryValue,
+						mode: "insensitive",
+					},
+				},
+				{
+					name: {
+						contains: queryValue[0].toUpperCase() + queryValue.slice(1),
+						mode: "insensitive",
+					},
+				},
+			],
 		},
 		select: {
 			id: true,
