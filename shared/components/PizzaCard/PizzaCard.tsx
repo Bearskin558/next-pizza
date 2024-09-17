@@ -3,7 +3,8 @@ import { Box, Button, Skeleton, Text } from "@mantine/core"
 import { Add01Icon } from "hugeicons-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 import { Colors } from "@/constants/colors"
 import styles from "./PizzaCard.module.css"
 
@@ -13,6 +14,12 @@ interface Props {
 
 const PizzasCard = ({ pizza }: Props) => {
 	const [isLoading, setisLoading] = useState(true)
+	const [isLoadingBtn, setisLoadingBtn] = useState(false)
+	const pathname = usePathname()
+
+	useEffect(() => {
+		if (pathname.includes(pizza.id)) setisLoadingBtn(false)
+	}, [pathname])
 
 	return (
 		<div className={styles.card}>
@@ -52,6 +59,8 @@ const PizzasCard = ({ pizza }: Props) => {
 								color={Colors.ACCENT}
 							/>
 						}
+						loading={isLoadingBtn}
+						onClick={() => setisLoadingBtn(true)}
 					>
 						Добавить
 					</Button>

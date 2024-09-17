@@ -2,14 +2,16 @@
 
 import { useIngredientsStore } from "@/shared/store/ingredients"
 import Modal from "@/shared/ui/Modal/Modal"
-import { Ingredient, Pizza, PizzaSizeName } from "@/types/pizzas"
-import { Button, SegmentedControl, Text, Title } from "@mantine/core"
+import { DoughValue, Ingredient, Pizza, PizzaSizeName } from "@/types/pizzas"
+import { Button, Text, Title } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import DoughControl from "../DoughControl/DoughControl"
 import IngredientCard from "../IngredientCard/IngredientCard"
+import PizzaSizeControl from "../PizzaSizeControl/PizzaSizeControl"
 import styles from "./PizzaModal.module.scss"
 import PizzaPrice from "./PizzaPrice"
 
@@ -17,36 +19,15 @@ interface Props {
 	pizza: Pizza
 }
 
-const doughData = [
-	{
-		label: "традиционное",
-		value: "traditional",
-	},
-	{
-		label: "тонкое",
-		value: "thin",
-	},
-]
-
-interface SizeData {
-	label: string
-	value: PizzaSizeName
-}
-
-const sizeData: SizeData[] = [
-	{ label: "25 см", value: "SMALL" },
-	{ label: "30 см", value: "MEDIUM" },
-	{ label: "35 см", value: "LARGE" },
-]
-
 const PizzaModal = ({ pizza }: Props) => {
 	const router = useRouter()
-	const [isOpen, { close }] = useDisclosure(true)
+	const [isOpen] = useDisclosure(true)
 	const ingredients = useIngredientsStore(state => state.ingredients)
 	const [checkedIngredients, setCheckedIngredients] = useState<Ingredient[]>([])
-	const [currentSize, setCurrentSize] = useState<PizzaSizeName>("SMALL")
+	const [currentDoughType, setCurrentDoughType] = useState<DoughValue>("traditional")
+	const [currentPizzaSize, setCurrentPizzaSize] = useState<PizzaSizeName>("MEDIUM")
 	const currentPrice =
-		pizza.sizes.find(size => size.size === currentSize)?.price! +
+		pizza.sizes.find(size => size.size === currentPizzaSize)?.price! +
 		checkedIngredients.reduce((sum, ingredient) => sum + ingredient.price, 0)
 	const toggleCheckedIngredient = (id: string) => {
 		if (checkedIngredients.findIndex(item => item.id === id) !== -1)
@@ -86,20 +67,21 @@ const PizzaModal = ({ pizza }: Props) => {
 					/>
 				</div>
 				<div className={styles.propertyBlock}>
-					<div>
-						<Title order={3}>{pizza.name}</Title>
-					</div>
+					<Title order={3}>{pizza.name}</Title>
+					<Text
+						size="sm"
+						opacity={0.9}
+					>
+						{pizza.description}
+					</Text>
 					<div className={styles.optionsBlock}>
-						<SegmentedControl
-							data={doughData}
-							radius="md"
-							withItemsBorders={false}
+						<DoughControl
+							value={currentDoughType}
+							onChange={setCurrentDoughType}
 						/>
-						<SegmentedControl
-							data={sizeData}
-							radius="md"
-							withItemsBorders={false}
-							onChange={size => setCurrentSize(size as PizzaSizeName)}
+						<PizzaSizeControl
+							value={currentPizzaSize}
+							onChange={setCurrentPizzaSize}
 						/>
 					</div>
 					<div>

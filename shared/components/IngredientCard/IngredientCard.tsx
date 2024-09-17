@@ -1,5 +1,4 @@
 import clsx from "clsx"
-import { motion, useIsPresent } from "framer-motion"
 import { CheckmarkCircle02Icon } from "hugeicons-react"
 import Image from "next/image"
 import { Colors } from "@/constants/colors"
@@ -20,18 +19,10 @@ const IngredientCard = ({ id, name, price, imageUrl, onClickHandler, isChecked }
 		[styles.checked]: isChecked,
 	})
 	const checkedIconClassName = clsx(styles.checkIcon, { [styles.isChecked]: isChecked })
-	const isPresent = useIsPresent()
 	return (
 		<div
 			className={cardClassName}
 			onClick={() => onClickHandler(id)}
-			// layout
-			// style={{ position: isPresent ? "static" : "absolute" }}
-			// initial={{ scale: 0.95, opacity: 0 }}
-			// animate={{ scale: 1, opacity: 1 }}
-			// exit={{ opacity: 0 }}
-			// // transition={{ duration: 0.3 }}
-			// transition={{ type: "spring", stiffness: 900, damping: 40 }}
 		>
 			<Image
 				src={imageUrl}

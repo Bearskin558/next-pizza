@@ -22,3 +22,4 @@ export interface Ingredient {
 
 export type PizzaSizeName = "SMALL" | "MEDIUM" | "LARGE"
 export type Category = "ALL" | "MEAT" | "SPICY" | "SWEET" | "VEGAN" | "CHICKEN"
+export type DoughValue = "thin" | "traditional"
