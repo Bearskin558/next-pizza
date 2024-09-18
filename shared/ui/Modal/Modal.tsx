@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import React, { MouseEvent, ReactNode, useEffect, useRef } from "react"
+import React, { MouseEvent, ReactNode, useEffect, useLayoutEffect, useRef } from "react"
 import { createPortal } from "react-dom"
 import styles from "./Modal.module.scss"
 
@@ -19,8 +19,18 @@ const Modal = ({ onClose, isOpen, children }: Props) => {
 
 	useEffect(() => {
 		isOpen ? document?.body.classList.add("modal-open") : document?.body.classList.remove("modal-open")
-		return () => document?.body.classList.remove("modal-open")
+		return () => {
+			console.log(1)
+			document?.body.classList.remove("modal-open")
+		}
 	}, [isOpen])
+
+	useLayoutEffect(() => {
+		document.body.style.marginRight = window.innerWidth - document.documentElement.offsetWidth + "px"
+		return () => {
+			document.body.style.marginRight = "0px"
+		}
+	}, [])
 
 	const modal = (
 		<motion.div

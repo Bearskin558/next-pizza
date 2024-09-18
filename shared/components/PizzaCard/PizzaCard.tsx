@@ -6,7 +6,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Colors } from "@/constants/colors"
-import styles from "./PizzaCard.module.css"
+import styles from "./PizzaCard.module.scss"
 
 interface Props {
 	pizza: Pizza
@@ -22,34 +22,35 @@ const PizzasCard = ({ pizza }: Props) => {
 	}, [pathname])
 
 	return (
-		<div className={styles.card}>
-			<div className={styles.imgBlock}>
-				{isLoading && <Skeleton className={styles.imgSkeleton} />}
-				<Image
-					src={pizza.imageUrl}
-					alt={pizza.name}
-					width={212}
-					height={212}
-					loading="lazy"
-					onLoad={() => setisLoading(false)}
-				/>
-			</div>
+		<Link
+			href={`/pizzas/${pizza.id}`}
+			scroll={false}
+		>
+			<div className={styles.card}>
+				<div className={styles.imgBlock}>
+					{isLoading && <Skeleton className={styles.imgSkeleton} />}
+					<Image
+						src={pizza.imageUrl}
+						alt={pizza.name}
+						width={212}
+						height={212}
+						loading="lazy"
+						onLoad={() => setisLoading(false)}
+					/>
+				</div>
 
-			<Text className={styles.cardName}>{pizza.name}</Text>
-			<Text
-				className={styles.cardDescription}
-				c="secondaryText"
-			>
-				{pizza.description}
-			</Text>
-			<Box className={styles.priceBlock}>
-				<Text fw={600}>
-					от <span>{pizza.sizes[0].price}</span> ₽
-				</Text>
-				<Link
-					href={`/pizzas/${pizza.id}`}
-					scroll={false}
+				<Text className={styles.cardName}>{pizza.name}</Text>
+				<Text
+					className={styles.cardDescription}
+					c="secondaryText"
 				>
+					{pizza.description}
+				</Text>
+				<Box className={styles.priceBlock}>
+					<Text fw={600}>
+						от <span>{pizza.sizes[0].price}</span> ₽
+					</Text>
+
 					<Button
 						className={styles.addBtn}
 						variant="outline"
@@ -64,9 +65,9 @@ const PizzasCard = ({ pizza }: Props) => {
 					>
 						Добавить
 					</Button>
-				</Link>
-			</Box>
-		</div>
+				</Box>
+			</div>
+		</Link>
 	)
 }
 

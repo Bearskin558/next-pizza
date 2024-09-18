@@ -1,5 +1,7 @@
+html {
+	--input-bd-focus: #f4511e;
+}
 body {
-	width: 100%;
 	font-weight: 400;
 	min-height: 100vh;
 	font-size: 16px;
@@ -10,6 +12,19 @@ body {
 	scroll-behavior: smooth;
 }
 
+body::-webkit-scrollbar {
+	width: 15px;
+}
+body::-webkit-scrollbar-track {
+	background: #242424;
+}
+body::-webkit-scrollbar-thumb {
+	cursor: pointer;
+	background-color: #f4501ebf;
+	border-radius: 20px;
+	border: 3px solid #242424;
+}
+
 .container {
 	max-width: 1270px;
 	margin: 0 auto;
@@ -18,4 +33,11 @@ body {
 
 .modal-open {
 	overflow-y: hidden;
+}
+
+.mantine-TextInput-input:focus {
+	border: 1px solid var(--accent-color);
+}
+.mantine-Input-input:focus-within {
+	border: 1px solid var(--accent-color);
 }

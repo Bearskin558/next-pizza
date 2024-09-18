@@ -10,7 +10,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import DoughControl from "../DoughControl/DoughControl"
-import IngredientCard from "../IngredientCard/IngredientCard"
+import IngredientsContainer from "../IngredientsContainer/IngredientsContainer"
 import PizzaSizeControl from "../PizzaSizeControl/PizzaSizeControl"
 import styles from "./PizzaModal.module.scss"
 import PizzaPrice from "./PizzaPrice"
@@ -25,32 +25,10 @@ const PizzaModal = ({ pizza }: Props) => {
 	const ingredients = useIngredientsStore(state => state.ingredients)
 	const [checkedIngredients, setCheckedIngredients] = useState<Ingredient[]>([])
 	const [currentDoughType, setCurrentDoughType] = useState<DoughValue>("traditional")
-	const [currentPizzaSize, setCurrentPizzaSize] = useState<PizzaSizeName>("MEDIUM")
+	const [currentPizzaSize, setCurrentPizzaSize] = useState<PizzaSizeName>("SMALL")
 	const currentPrice =
 		pizza.sizes.find(size => size.size === currentPizzaSize)?.price! +
 		checkedIngredients.reduce((sum, ingredient) => sum + ingredient.price, 0)
-	const toggleCheckedIngredient = (id: string) => {
-		if (checkedIngredients.findIndex(item => item.id === id) !== -1)
-			return setCheckedIngredients(prev => prev.filter(item => item.id !== id))
-		const ingredient = ingredients.find(item => item.id === id)
-		if (ingredient) setCheckedIngredients(prev => [...prev, ingredient])
-	}
-
-	const ingredientsCards = [...ingredients]
-		.sort((a, b) => a.name.localeCompare(b.name))
-		.sort(
-			(a, b) =>
-				checkedIngredients.findIndex(item => item.name === b.name) -
-				checkedIngredients.findIndex(item => item.name === a.name),
-		)
-		.map(item => (
-			<IngredientCard
-				key={item.id}
-				{...item}
-				onClickHandler={toggleCheckedIngredient}
-				isChecked={checkedIngredients.findIndex(checkedIngredient => checkedIngredient.id === item.id) !== -1}
-			/>
-		))
 	return (
 		<Modal
 			onClose={() => router.back()}
@@ -86,9 +64,11 @@ const PizzaModal = ({ pizza }: Props) => {
 					</div>
 					<div>
 						<Text className={styles.ingredientsTitle}>Добавить по вкусу</Text>
-						<AnimatePresence>
-							<div className={styles.ingredientsBlock}>{ingredientsCards}</div>
-						</AnimatePresence>
+						<IngredientsContainer
+							ingredients={ingredients}
+							setCheckedIngredients={setCheckedIngredients}
+							checkedIngredients={checkedIngredients}
+						/>
 					</div>
 
 					<Button

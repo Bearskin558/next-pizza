@@ -1,8 +1,10 @@
 .headerContainer {
+	height: clamp(100px, 10vw, 130px);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 100px;
+	gap: 10px;
+	margin-bottom: clamp(25px, 3vw, 40px);
 }
 .btnBlock {
 	display: flex;

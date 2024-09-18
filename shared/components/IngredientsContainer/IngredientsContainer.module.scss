@@ -1,0 +1,18 @@
+.ingredients {
+	height: 350px;
+	width: 100%;
+	padding-right: 15px;
+	overflow-y: scroll;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 23%);
+	justify-content: space-between;
+	row-gap: 20px;
+	scrollbar-width: thin;
+	scrollbar-color: var(--accent-color) #1a1a1a;
+}
+
+@media (max-width: 1024px) {
+	.ingredients {
+		grid-template-columns: repeat(auto-fit, 31%);
+	}
+}

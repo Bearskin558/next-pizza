@@ -1,6 +1,6 @@
 import theme from "@/styles/mantineTheme"
 import { MantineProvider } from "@mantine/core"
-import QueryProvider from "../QueryProvider/QueryProvider"
+import { SessionProvider } from "next-auth/react"
 
 interface Props {
 	children: React.ReactNode
@@ -12,7 +12,7 @@ const Providers = ({ children }: Props) => {
 			theme={theme}
 			defaultColorScheme="dark"
 		>
-			{children}
+			<SessionProvider>{children}</SessionProvider>
 		</MantineProvider>
 	)
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import { Button, TextInput, colorsTuple, createTheme, rem } from "@mantine/core"
+import { Colors } from "@/constants/colors"
 
 const theme = createTheme({
 	colors: {
@@ -56,6 +57,19 @@ const theme = createTheme({
 				fz: rem(22),
 			},
 		}),
+		// TextInput: TextInput.extend({
+		// 	vars: () => {
+		// 		return {
+		// 			root: {
+		// 				"--input-bd-focus": "#FFFFFF",
+		// 			},
+
+		// 		}
+		// 	},
+		// 	styles: {{
+
+		// 	}}
+		// }),
 	},
 	fontFamily: "Nunito, sans-serif",
 })

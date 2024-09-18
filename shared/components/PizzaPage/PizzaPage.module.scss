@@ -9,7 +9,7 @@
 	border-radius: 20px;
 	overflow: hidden;
 	margin: 0 auto;
-	margin-top: 50px;
+	margin-top: clamp(20px, 5vw, 50px);
 }
 .imageBlock {
 	display: flex;
@@ -66,5 +66,18 @@
 	margin-top: 8px;
 	span {
 		font-size: 16px;
+	}
+}
+@media (max-width: 768px) {
+	.container {
+		flex-direction: column;
+		background-color: transparent;
+		height: max-content;
+	}
+	.imageBlock {
+		width: 100%;
+	}
+	.propertyBlock {
+		width: 100%;
 	}
 }

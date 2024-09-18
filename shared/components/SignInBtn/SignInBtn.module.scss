@@ -1,0 +1,21 @@
+.signIn {
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.inner {
+	display: flex;
+	gap: 10px;
+}
+
+@media (max-width: 768px) {
+	.signIn {
+		width: 50px;
+	}
+	.text {
+		display: none;
+	}
+}
+.profileBtn {
+}

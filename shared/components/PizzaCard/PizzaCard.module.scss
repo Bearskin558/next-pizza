@@ -5,7 +5,20 @@
 	padding: 15px;
 	border-radius: 10px;
 	height: fit-content;
+
+	img {
+		transition: all 0.2s ease-in-out;
+	}
+
+	&:hover {
+		box-shadow: rgba(23, 23, 23, 0.863) 0px 5px 12px;
+
+		img {
+			transform: translateY(5px);
+		}
+	}
 }
+
 .cardName {
 	font-weight: 600;
 	font-size: 20px;
@@ -30,9 +43,7 @@
 	justify-content: space-between;
 	align-items: center;
 }
-.card:hover {
-	box-shadow: rgba(14, 14, 14, 0.308) 0px 4px 12px;
-}
+
 .addBtn {
 	width: 125px;
 	height: 42px;
