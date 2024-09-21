@@ -1,10 +1,9 @@
 "use client"
 
 import { useIngredientsStore } from "@/shared/store/ingredients"
-import { Ingredient } from "@/types/pizzas"
 import { Button, Checkbox, Skeleton, Text } from "@mantine/core"
 import { AnimatePresence, motion } from "framer-motion"
-import { MouseEvent, memo, useState } from "react"
+import { useEffect, useState } from "react"
 import IngredientItem from "./IngredientItem"
 import IngredientSkeleton from "./IngredientSkeleton/IngredientSkeleton"
 import styles from "./IngredientsFilter.module.css"
@@ -18,7 +17,8 @@ const IngredientsFilter = ({ setIngredients, checkedIngredients }: Props) => {
 	const checkHandler = (str: string[]) => {
 		setIngredients(str)
 	}
-	const [countVisibleIngredients, setCountVisibleIngredients] = useState<4 | 20>(4)
+	const [minCountVisibleIngredients, setMinCountVisibleIngredients] = useState(4)
+	const [countVisibleIngredients, setCountVisibleIngredients] = useState(minCountVisibleIngredients)
 	const checkboxes = ingredients
 		?.sort((a, b) => a.name.localeCompare(b.name))
 		?.sort((a, b) => Number(checkedIngredients.includes(b.name)) - Number(checkedIngredients.includes(a.name)))
@@ -30,6 +30,16 @@ const IngredientsFilter = ({ setIngredients, checkedIngredients }: Props) => {
 				key={ingredient.id}
 			/>
 		))
+
+	const onClickVisibleButton = () => {
+		countVisibleIngredients === ingredients.length
+			? setCountVisibleIngredients(() => (checkedIngredients.length > 4 ? checkedIngredients.length : 4))
+			: setCountVisibleIngredients(ingredients.length)
+	}
+
+	useEffect(() => {
+		if (checkedIngredients.length === 0) setCountVisibleIngredients(4)
+	}, [checkedIngredients.length])
 
 	return (
 		<div className={styles.ingredients}>
@@ -65,9 +75,9 @@ const IngredientsFilter = ({ setIngredients, checkedIngredients }: Props) => {
 				h={22}
 				py={0}
 				bg={"none"}
-				onClick={() => setCountVisibleIngredients(prev => (prev === 4 ? 20 : 4))}
+				onClick={onClickVisibleButton}
 			>
-				{countVisibleIngredients === 20 ? "- Скрыть" : "+ Показать все"}
+				{countVisibleIngredients === ingredients.length ? "- Скрыть" : "+ Показать все"}
 			</Button>
 		</div>
 	)

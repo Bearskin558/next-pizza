@@ -21,7 +21,7 @@ export const useFilterStore = create<FilterState>((set, get) => ({
 	setCategory: categoryName => set({ category: categoryName }),
 	setMinPrice: price => set({ minPrice: price }),
 	setMaxPrice: price => set({ maxPrice: price }),
-	setIngredients: ingredients => set({ ingredients: ingredients }),
+	setIngredients: ingredients => set({ ingredients }),
 	resetFilters: () => {
 		set({
 			ingredients: [],

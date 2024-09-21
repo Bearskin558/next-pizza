@@ -1,0 +1,11 @@
+.addButton {
+	height: 45px;
+	margin-top: 8px;
+	span {
+		font-size: 16px;
+	}
+	& > span > span > span {
+		position: absolute;
+		left: 320px;
+	}
+}

@@ -2,7 +2,7 @@
 
 import { searchPizzas } from "@/app/api/fetch/pizza"
 import { Pizza } from "@/types/pizzas"
-import { CloseButton, TextInput } from "@mantine/core"
+import { CloseButton, Loader, TextInput } from "@mantine/core"
 import { useToggle } from "@siberiacancode/reactuse"
 import clsx from "clsx"
 import { Search02Icon } from "hugeicons-react"
@@ -17,6 +17,7 @@ const Search = () => {
 	const pathname = usePathname()
 	const [isFocused, toggleIsFocused] = useToggle([false, true])
 	const [searchValue, setSearchValue] = useState("")
+	const [isLoading, setIsLoading] = useState(false)
 	const [filteredPizzas, setFilteredPizzas] = useState<Pizza[]>([])
 	const blurClassName = clsx(styles.blur, { [styles.onFocus]: isFocused })
 
@@ -30,8 +31,10 @@ const Search = () => {
 	const debounceSearchPizzas = useCallback(
 		debounce(async (searchValue: string) => {
 			if (searchValue.length === 0) return setFilteredPizzas([])
+			setIsLoading(true)
 			const pizzas = (await searchPizzas(searchValue)).data
 			setFilteredPizzas(pizzas)
+			setIsLoading(false)
 		}, 300),
 		[],
 	)
@@ -69,12 +72,25 @@ const Search = () => {
 						value={searchValue}
 						onChange={e => onChangeHandler(e.target.value)}
 						leftSection={
-							<Search02Icon
-								color={Colors.SECONDARY_TEXT}
-								size={20}
-							/>
+							isLoading ? (
+								<Loader
+									size={20}
+									color={Colors.ACCENT}
+								/>
+							) : (
+								<Search02Icon
+									color={Colors.SECONDARY_TEXT}
+									size={20}
+								/>
+							)
 						}
-						rightSection={searchValue.length > 0 && <CloseButton onClick={resetHandler} />}
+						rightSection={
+							searchValue.length > 0 && (
+								<div className={styles.rightSection}>
+									<CloseButton onClick={resetHandler} />
+								</div>
+							)
+						}
 					/>
 					{filteredPizzas.length > 0 && (
 						<div className={styles.pizzasCards}>

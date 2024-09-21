@@ -1,6 +1,8 @@
-import { signOut } from "@/lib/auth/auth"
+"use client"
+
 import { ActionIcon, Avatar, Button, Menu, MenuDropdown, MenuItem, MenuTarget } from "@mantine/core"
 import { BorderFullIcon, LogoutCircle02Icon } from "hugeicons-react"
+import { signOut } from "next-auth/react"
 import styles from "./ProfileButton.module.scss"
 
 interface Props {
@@ -23,24 +25,18 @@ const ProfileButton = ({ imageUrl }: Props) => {
 			</MenuTarget>
 			<MenuDropdown>
 				<MenuItem leftSection={<BorderFullIcon size={20} />}>Заказы</MenuItem>
-				<form
-					action={async () => {
-						"use server"
-						await signOut()
-					}}
+				<MenuItem
+					leftSection={
+						<LogoutCircle02Icon
+							size={20}
+							type="submit"
+						/>
+					}
+					type="submit"
+					onClick={() => signOut()}
 				>
-					<MenuItem
-						leftSection={
-							<LogoutCircle02Icon
-								size={20}
-								type="submit"
-							/>
-						}
-						type="submit"
-					>
-						Выйти
-					</MenuItem>
-				</form>
+					Выйти
+				</MenuItem>
 			</MenuDropdown>
 		</Menu>
 	)

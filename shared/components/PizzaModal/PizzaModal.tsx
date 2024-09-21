@@ -5,15 +5,14 @@ import Modal from "@/shared/ui/Modal/Modal"
 import { DoughValue, Ingredient, Pizza, PizzaSizeName } from "@/types/pizzas"
 import { Button, Text, Title } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
-import { AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import DoughControl from "../DoughControl/DoughControl"
 import IngredientsContainer from "../IngredientsContainer/IngredientsContainer"
+import PizzaModalAddButton from "../PizzaModalAddButton/PizzaModalAddButton"
 import PizzaSizeControl from "../PizzaSizeControl/PizzaSizeControl"
 import styles from "./PizzaModal.module.scss"
-import PizzaPrice from "./PizzaPrice"
 
 interface Props {
 	pizza: Pizza
@@ -70,13 +69,7 @@ const PizzaModal = ({ pizza }: Props) => {
 							checkedIngredients={checkedIngredients}
 						/>
 					</div>
-
-					<Button
-						className={styles.addBtn}
-						rightSection={<PizzaPrice price={currentPrice} />}
-					>
-						Добавить в корзину
-					</Button>
+					<PizzaModalAddButton price={currentPrice} />
 				</div>
 			</div>
 		</Modal>

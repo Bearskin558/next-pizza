@@ -20,7 +20,6 @@ const Modal = ({ onClose, isOpen, children }: Props) => {
 	useEffect(() => {
 		isOpen ? document?.body.classList.add("modal-open") : document?.body.classList.remove("modal-open")
 		return () => {
-			console.log(1)
 			document?.body.classList.remove("modal-open")
 		}
 	}, [isOpen])

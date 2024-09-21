@@ -21,6 +21,7 @@ const SearchPizzaCard = ({ pizza, onClickHandler }: Props) => {
 			<Link
 				href={`/pizzas/${pizza.id}`}
 				onClick={onClickHandler}
+				scroll={false}
 			>
 				<div className={styles.container}>
 					<Image
