@@ -1,48 +1,18 @@
 import { signIn } from "@/lib/auth/auth"
-import { Button, Menu, MenuDropdown, MenuItem, MenuTarget, Text } from "@mantine/core"
+import { ActionIcon, Button, Menu, MenuDropdown, MenuItem, MenuLabel, MenuTarget, Text } from "@mantine/core"
 import { GithubIcon, GoogleIcon, UserIcon } from "hugeicons-react"
 import { Colors } from "@/constants/colors"
+import HeaderButton from "../HeaderButton/HeaderButton"
 import styles from "./SignInBtn.module.scss"
 
 const SignInBtn = () => {
 	return (
 		<Menu>
 			<MenuTarget>
-				<Button
-					className={styles.signIn}
-					variant="outline"
-					// loading={isLoading}
-				>
-					<div className={styles.inner}>
-						<UserIcon
-							color={Colors.ACCENT}
-							size={20}
-						/>
-						<Text
-							size="sm"
-							className={styles.text}
-						>
-							Войти
-						</Text>
-					</div>
-				</Button>
+				<HeaderButton Icon={UserIcon} />
 			</MenuTarget>
 			<MenuDropdown>
-				{/* <MenuItem
-					leftSection={<GithubIcon />}
-					type="submit"
-					onClick={() => onClickAuthButton("github")}
-				>
-					Github
-				</MenuItem>
-
-				<MenuItem
-					leftSection={<GoogleIcon />}
-					type="submit"
-					onClick={() => onClickAuthButton("google")}
-				>
-					Google
-				</MenuItem> */}
+				<MenuLabel>Войти при помощи:</MenuLabel>
 				<form
 					action={async () => {
 						"use server"

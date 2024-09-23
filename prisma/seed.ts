@@ -1,6 +1,6 @@
+import { prisma } from "@/lib/auth/auth"
 import ingredients from "./ingredients"
 import pizzas, { PizzaSizeSeed } from "./pizzas"
-import prisma from "./prisma-client"
 
 const up = async () => {
 	await prisma.ingredient.createMany({

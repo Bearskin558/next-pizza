@@ -10,7 +10,7 @@ const neon = new Pool({
 	connectionString: process.env.POSTGRES_PRISMA_URL,
 })
 const adapter = new PrismaNeon(neon)
-const prisma = new PrismaClient({ adapter })
+export const prisma = new PrismaClient({ adapter })
 
 export const authConfig: NextAuthConfig = {
 	providers: [

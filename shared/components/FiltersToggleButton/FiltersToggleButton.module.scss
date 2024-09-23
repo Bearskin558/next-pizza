@@ -1,0 +1,19 @@
+.button {
+	display: none;
+	width: fit-content;
+	height: fit-content;
+}
+
+.icon {
+	transition: all 0.2s ease-in-out;
+}
+
+.open {
+	transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+	.button {
+		display: flex;
+	}
+}

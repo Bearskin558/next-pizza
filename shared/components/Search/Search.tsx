@@ -2,15 +2,16 @@
 
 import { searchPizzas } from "@/app/api/fetch/pizza"
 import { Pizza } from "@/types/pizzas"
-import { CloseButton, Loader, TextInput } from "@mantine/core"
+import { ActionIcon, Button, CloseButton, Loader, TextInput } from "@mantine/core"
 import { useToggle } from "@siberiacancode/reactuse"
 import clsx from "clsx"
 import { Search02Icon } from "hugeicons-react"
 import { debounce } from "lodash"
 import { usePathname } from "next/navigation"
-import { useCallback, useEffect, useLayoutEffect, useState } from "react"
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { Colors } from "@/constants/colors"
-import SearchPizzaCard from "../../SearchPizzaCard/SearchPizzaCard"
+import HeaderButton from "../HeaderButton/HeaderButton"
+import SearchPizzaCard from "../SearchPizzaCard/SearchPizzaCard"
 import styles from "./Search.module.scss"
 
 const Search = () => {
@@ -19,6 +20,8 @@ const Search = () => {
 	const [searchValue, setSearchValue] = useState("")
 	const [isLoading, setIsLoading] = useState(false)
 	const [filteredPizzas, setFilteredPizzas] = useState<Pizza[]>([])
+	const [visibleSearchInput, setVisibleSearchInput] = useState(false)
+	const inputRef = useRef<HTMLInputElement>(null)
 	const blurClassName = clsx(styles.blur, { [styles.onFocus]: isFocused })
 
 	useLayoutEffect(() => {
@@ -53,18 +56,39 @@ const Search = () => {
 		toggleIsFocused(false)
 		setSearchValue("")
 		setFilteredPizzas([])
+		setVisibleSearchInput(false)
+		setIsLoading(false)
 	}
 
 	useEffect(() => {
 		isFocused ? document?.body.classList.add("modal-open") : document?.body.classList.remove("modal-open")
 	}, [isFocused])
 
+	useEffect(() => {
+		visibleSearchInput === true && inputRef.current?.focus()
+	}, [visibleSearchInput])
+
+	const onClickSearchButtonHandler = () => {
+		toggleIsFocused()
+		setVisibleSearchInput(true)
+	}
+
+	const classNameSearchInput = clsx(styles.search, {
+		[styles.visible]: visibleSearchInput,
+	})
+
 	if (pathname === "/")
 		return (
 			<div className={styles.wrapper}>
 				<div className={styles.searchContainer}>
+					<HeaderButton
+						Icon={Search02Icon}
+						onClick={onClickSearchButtonHandler}
+						className={styles.searchButton}
+					/>
 					<TextInput
-						className={styles.search}
+						className={classNameSearchInput}
+						ref={inputRef}
 						size="md"
 						placeholder="Поиск пиццы..."
 						radius={"lg"}

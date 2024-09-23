@@ -1,0 +1,26 @@
+.wrapper {
+	width: 100%;
+}
+.wrapper *[data-active="true"] {
+	color: var(--accent-color);
+}
+.categories {
+	width: 100%;
+	font-weight: 700;
+	height: 42px;
+	& label {
+		height: 100%;
+		font-weight: 700;
+	}
+	scrollbar-width: thin;
+	// scrollbar-color: var(--accent-color) #1a1a1a;
+}
+@media (max-width: 768px) {
+	.categories {
+		margin-bottom: 10px;
+		overflow-x: scroll;
+		& > span {
+			display: none;
+		}
+	}
+}

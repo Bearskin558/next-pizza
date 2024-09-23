@@ -16,7 +16,7 @@
 	width: 1000px;
 	background-color: #242424;
 	border-radius: 20px;
-	overflow: hidden;
+	position: relative;
 }
 .imageBlock {
 	display: flex;
@@ -65,5 +65,35 @@
 
 	*[data-active="true"] {
 		color: var(--accent-color);
+	}
+}
+@media (max-width: 768px) {
+	.container {
+		flex-direction: column;
+		height: max-content;
+		overflow: auto;
+		align-self: flex-start;
+		height: 100vh;
+	}
+	.imageBlock {
+		width: 100%;
+		// background-color: transparent;
+		img {
+			width: 150px;
+			height: 150px;
+		}
+	}
+	.propertyBlock {
+		width: 100%;
+	}
+}
+.closeButton {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	svg {
+		path {
+			fill: var(--accent-color);
+		}
 	}
 }

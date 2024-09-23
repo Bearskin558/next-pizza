@@ -1,7 +1,7 @@
-import { Colors } from "@/constants/colors"
 import { Text } from "@mantine/core"
 import { Pizza02Icon } from "hugeicons-react"
 import Link from "next/link"
+import { Colors } from "@/constants/colors"
 import styles from "./Logo.module.css"
 
 const Logo = () => {
@@ -17,12 +17,7 @@ const Logo = () => {
 				/>
 			</div>
 			<div className={styles.textBlock}>
-				<Text
-					className={styles.title}
-					size="lg"
-				>
-					NEXT PIZZA
-				</Text>
+				<Text className={styles.title}>NEXT PIZZA</Text>
 				<Text
 					className={styles.text}
 					size="sm"

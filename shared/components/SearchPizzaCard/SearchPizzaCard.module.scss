@@ -7,8 +7,16 @@
 	position: relative;
 	padding: 5px 0;
 	overflow: hidden;
+	z-index: 10;
 
 	&:hover {
 		filter: brightness(1);
 	}
 }
+
+// @media (max-width: 768px) {
+// 	.container {
+// 		position: fixed;
+// 		left: 5vw;
+// 	}
+// }

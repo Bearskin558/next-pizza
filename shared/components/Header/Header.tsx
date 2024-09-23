@@ -1,11 +1,13 @@
 import { auth } from "@/lib/auth/auth"
 import clsx from "clsx"
+import { ShoppingCart02Icon } from "hugeicons-react"
+import { Colors } from "@/constants/colors"
+import HeaderButton from "../HeaderButton/HeaderButton"
+import Logo from "../Logo/Logo"
 import ProfileButton from "../ProfileButton/ProfileButton"
+import Search from "../Search/Search"
 import SignInBtn from "../SignInBtn/SignInBtn"
-import CartButton from "./CartButton/CartButton"
 import styles from "./Header.module.css"
-import Logo from "./Logo/Logo"
-import Search from "./Search/Search"
 
 async function Header() {
 	const headerClassName = clsx("container", styles.headerContainer)
@@ -19,7 +21,7 @@ async function Header() {
 				<div className={styles.btnBlock}>
 					{session && <ProfileButton imageUrl={session.user?.image} />}
 					{session === null && <SignInBtn />}
-					<CartButton />
+					<HeaderButton Icon={ShoppingCart02Icon} />
 				</div>
 			</div>
 		</header>

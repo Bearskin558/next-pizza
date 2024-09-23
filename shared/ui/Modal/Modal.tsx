@@ -21,14 +21,15 @@ const Modal = ({ onClose, isOpen, children }: Props) => {
 		isOpen ? document?.body.classList.add("modal-open") : document?.body.classList.remove("modal-open")
 		return () => {
 			document?.body.classList.remove("modal-open")
+			document.body.style.marginRight = "0px"
 		}
 	}, [isOpen])
 
 	useLayoutEffect(() => {
 		document.body.style.marginRight = window.innerWidth - document.documentElement.offsetWidth + "px"
-		return () => {
-			document.body.style.marginRight = "0px"
-		}
+		// return () => {
+		// 	document.body.style.marginRight = "0px"
+		// }
 	}, [])
 
 	const modal = (

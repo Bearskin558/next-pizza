@@ -1,14 +1,41 @@
-.filters {
+.container {
 	width: 244px;
 	display: flex;
 	flex-direction: column;
-	gap: 30px;
+	gap: 20px;
 	flex-shrink: 0;
 }
+
+.filters {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	transition: all 0.15s ease-in-out;
+}
+
 .button {
 	width: 100%;
 	height: 50px;
 	& span {
 		font-size: 16px;
+	}
+}
+@media (max-width: 768px) {
+	.container {
+		width: 100%;
+		gap: 10px;
+	}
+	.title {
+		display: none;
+	}
+	.filters {
+		opacity: 0;
+		height: 0;
+		visibility: hidden;
+	}
+	.open {
+		opacity: 1;
+		height: auto;
+		visibility: visible;
 	}
 }

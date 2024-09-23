@@ -3,7 +3,7 @@
 import { useIngredientsStore } from "@/shared/store/ingredients"
 import Modal from "@/shared/ui/Modal/Modal"
 import { DoughValue, Ingredient, Pizza, PizzaSizeName } from "@/types/pizzas"
-import { Text, Title } from "@mantine/core"
+import { CloseButton, Text, Title } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
@@ -20,7 +20,7 @@ interface Props {
 
 const PizzaModal = ({ pizza }: Props) => {
 	const router = useRouter()
-	const [isOpen] = useDisclosure(true)
+	const [isOpen, { close }] = useDisclosure(true)
 	const ingredients = useIngredientsStore(state => state.ingredients)
 	const [checkedIngredients, setCheckedIngredients] = useState<Ingredient[]>([])
 	const [currentDoughType, setCurrentDoughType] = useState<DoughValue>("traditional")
@@ -28,9 +28,13 @@ const PizzaModal = ({ pizza }: Props) => {
 	const currentPrice =
 		pizza.sizes.find(size => size.size === currentPizzaSize)?.price! +
 		checkedIngredients.reduce((sum, ingredient) => sum + ingredient.price, 0)
+	const onCloseModal = () => {
+		router.back()
+		close()
+	}
 	return (
 		<Modal
-			onClose={() => router.back()}
+			onClose={onCloseModal}
 			isOpen={isOpen}
 		>
 			<div className={styles.container}>
@@ -71,6 +75,11 @@ const PizzaModal = ({ pizza }: Props) => {
 					</div>
 					<PizzaAddButton price={currentPrice} />
 				</div>
+				<CloseButton
+					onClick={onCloseModal}
+					className={styles.closeButton}
+					size={40}
+				/>
 			</div>
 		</Modal>
 	)

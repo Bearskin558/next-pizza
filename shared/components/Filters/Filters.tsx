@@ -6,10 +6,13 @@ import { Ingredient } from "@/types/pizzas"
 import { toCompareFilterStores } from "@/utils/toComapreStores"
 import { toCompareFilterStoreWithInitial } from "@/utils/toCompareFilterStoreWithInitial"
 import { Button, Title } from "@mantine/core"
+import { useToggle } from "@mantine/hooks"
+import clsx from "clsx"
 import { useEffect, useState } from "react"
+import FiltersToggleButton from "../FiltersToggleButton/FiltersToggleButton"
+import IngredientsFilter from "../IngredientsFilter/IngredientsFilter"
+import PriceFilter from "../PriceFilter/PriceFilter"
 import styles from "./Filters.module.css"
-import IngredientsFilter from "./IngredientsFilter/IngredientsFilter"
-import PriceFilter from "./PriceFilter/PriceFilter"
 
 interface Props {
 	ingredients: Ingredient[]
@@ -46,6 +49,10 @@ const Filters = ({ ingredients }: Props) => {
 		checkedIngredients,
 		ingredientsStore,
 	)
+	const [isOpenFilters, toggleIsOpen] = useToggle([false, true])
+	const classNameFilters = clsx(styles.filters, {
+		[styles.open]: isOpenFilters,
+	})
 
 	const applyHandler = () => {
 		setMinPriceStore(minPrice)
@@ -65,39 +72,45 @@ const Filters = ({ ingredients }: Props) => {
 	}, [])
 
 	return (
-		<div className={styles.filters}>
+		<div className={styles.container}>
+			<FiltersToggleButton
+				onClick={toggleIsOpen}
+				isOpen={isOpenFilters}
+			/>
 			<Title
 				size="h3"
-				order={3}
+				className={styles.title}
 			>
 				Фильтрация
 			</Title>
-			<PriceFilter
-				minPrice={minPrice}
-				maxPrice={maxPrice}
-				setMaxPrice={setMaxPrice}
-				setMinPrice={setMinPrice}
-			/>
-			<IngredientsFilter
-				setIngredients={setCheckedIngredients}
-				checkedIngredients={checkedIngredients}
-			/>
-			<Button
-				className={styles.button}
-				disabled={isEqualFilterStores}
-				onClick={applyHandler}
-			>
-				Применить
-			</Button>
+			<div className={classNameFilters}>
+				<PriceFilter
+					minPrice={minPrice}
+					maxPrice={maxPrice}
+					setMaxPrice={setMaxPrice}
+					setMinPrice={setMinPrice}
+				/>
+				<IngredientsFilter
+					setIngredients={setCheckedIngredients}
+					checkedIngredients={checkedIngredients}
+				/>
+				<Button
+					className={styles.button}
+					disabled={isEqualFilterStores}
+					onClick={applyHandler}
+				>
+					Применить
+				</Button>
 
-			<Button
-				color="red"
-				className={styles.button}
-				disabled={isInitialState && isEqualFilterStores}
-				onClick={resetHandler}
-			>
-				Сбросить фильтры
-			</Button>
+				<Button
+					color="red"
+					className={styles.button}
+					disabled={isInitialState && isEqualFilterStores}
+					onClick={resetHandler}
+				>
+					Сбросить фильтры
+				</Button>
+			</div>
 		</div>
 	)
 }

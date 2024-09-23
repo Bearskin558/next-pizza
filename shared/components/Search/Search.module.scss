@@ -1,10 +1,6 @@
 .wrapper {
 	align-self: center;
 	flex-grow: 1;
-	margin: 0 50px;
-	div:nth-of-type(1) {
-		z-index: 10;
-	}
 	input {
 		height: 50px;
 		border-color: transparent;
@@ -23,6 +19,7 @@
 	background-color: rgba(0, 0, 0, 0.3);
 	position: fixed;
 	top: 0;
+	backdrop-filter: blur(3px);
 	right: 0;
 
 	&.onFocus {
@@ -31,6 +28,8 @@
 	}
 }
 .search {
+	z-index: 10;
+	position: relative;
 }
 .searchContainer {
 	width: 100%;
@@ -47,8 +46,49 @@
 	background-color: #2e2e2e;
 	padding: 10px;
 	border-radius: 10px;
+	z-index: 10;
 }
 .rightSection {
 	display: flex;
 	align-items: center;
+}
+.searchButton {
+	display: none;
+}
+@media (max-width: 768px) {
+	.blur {
+		background-color: rgba(0, 0, 0, 0.3);
+		backdrop-filter: blur(5px);
+	}
+	.search {
+		display: none;
+		width: 40px;
+		&:focus-within {
+			position: fixed;
+			left: 5vw;
+			width: 90vw;
+		}
+	}
+	.searchButton {
+		display: block;
+		align-self: flex-end;
+	}
+	.wrapper {
+		width: fit-content;
+		flex-grow: 0;
+		margin-left: auto;
+	}
+	.visible {
+		display: block;
+		position: fixed;
+		left: 5vw;
+		width: 90vw;
+	}
+
+	.pizzasCards {
+		position: fixed;
+		left: 5vw;
+		top: 17vh;
+		width: 90vw;
+	}
 }

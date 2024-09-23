@@ -3,7 +3,7 @@
 import { useFilterStore } from "@/shared/store/filters"
 import { Category } from "@/types/pizzas"
 import { SegmentedControl } from "@mantine/core"
-import styles from "./Categories.module.css"
+import styles from "./Categories.module.scss"
 
 interface CategoryData {
 	label: string
