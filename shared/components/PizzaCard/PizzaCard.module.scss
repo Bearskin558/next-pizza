@@ -6,14 +6,14 @@
 	border-radius: 10px;
 	height: fit-content;
 
-	img {
+	& > div:first-child {
 		transition: all 0.2s ease-in-out;
 	}
 
 	&:hover {
 		box-shadow: rgba(23, 23, 23, 0.863) 0px 5px 12px;
 
-		img {
+		& > div:first-child {
 			transform: translateY(5px);
 		}
 	}
@@ -30,14 +30,6 @@
 	line-height: 21px;
 	height: 105px;
 }
-.imgBlock {
-	border-radius: 15px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 25px;
-	position: relative;
-}
 .priceBlock {
 	display: flex;
 	justify-content: space-between;
@@ -50,15 +42,4 @@
 	& span {
 		font-size: 14px;
 	}
-}
-.imgSkeleton {
-	position: absolute;
-	top: 0px;
-	left: 32px;
-	z-index: 10;
-	width: 200px;
-	height: 200px;
-	border-radius: 110px;
-	transition: all 0.3s ease-in-out;
-	/* opacity: 0.3; */
 }

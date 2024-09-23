@@ -1,16 +1,24 @@
-import prisma from "@/prisma/prisma-client"
 import { PrismaAdapter } from "@auth/prisma-adapter"
+import { Pool } from "@neondatabase/serverless"
+import { PrismaNeon } from "@prisma/adapter-neon"
+import { PrismaClient } from "@prisma/client"
 import NextAuth, { NextAuthConfig } from "next-auth"
-import GithubPrvider from "next-auth/providers/github"
-import GooglePrvider from "next-auth/providers/google"
+import GithubProvider from "next-auth/providers/github"
+import GoogleProvider from "next-auth/providers/google"
+
+const neon = new Pool({
+	connectionString: process.env.POSTGRES_PRISMA_URL,
+})
+const adapter = new PrismaNeon(neon)
+const prisma = new PrismaClient({ adapter })
 
 export const authConfig: NextAuthConfig = {
 	providers: [
-		GooglePrvider({
+		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_SECRET,
 		}),
-		GithubPrvider({
+		GithubProvider({
 			clientId: process.env.GITHUB_CLIENT_ID,
 			clientSecret: process.env.GITHUB_SECRET,
 		}),
@@ -20,6 +28,9 @@ export const authConfig: NextAuthConfig = {
 	// 	authorized: async ({ auth }) => {
 	// 		return !!auth //редирект на страницу аутентификации для приватных роутов
 	// 	},
+	// },
+	// pages: {
+	// 	signIn: "/signin",
 	// },
 }
 

@@ -1,12 +1,12 @@
 "use client"
 
 import { DoughValue, Ingredient, Pizza, PizzaSizeName } from "@/types/pizzas"
-import { Button, Text, Title } from "@mantine/core"
+import { Text, Title } from "@mantine/core"
 import Image from "next/image"
 import { useState } from "react"
 import DoughControl from "../DoughControl/DoughControl"
 import IngredientsContainer from "../IngredientsContainer/IngredientsContainer"
-import PizzaPrice from "../PizzaModal/PizzaPrice"
+import PizzaAddButton from "../PizzaAddButton/PizzaAddButton"
 import PizzaSizeControl from "../PizzaSizeControl/PizzaSizeControl"
 import styles from "./PizzaPage.module.scss"
 
@@ -59,13 +59,7 @@ const PizzaPage = ({ pizza, ingredients }: Props) => {
 						checkedIngredients={checkedIngredients}
 					/>
 				</div>
-
-				<Button
-					className={styles.addBtn}
-					rightSection={<PizzaPrice price={currentPrice} />}
-				>
-					Добавить в корзину
-				</Button>
+				<PizzaAddButton price={currentPrice} />
 			</div>
 		</div>
 	)

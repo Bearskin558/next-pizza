@@ -6,6 +6,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Colors } from "@/constants/colors"
+import PizzaCardImage from "../PizzaCardImage/PizzaCardImage"
 import styles from "./PizzaCard.module.scss"
 
 interface Props {
@@ -13,7 +14,6 @@ interface Props {
 }
 
 const PizzasCard = ({ pizza }: Props) => {
-	const [isLoading, setisLoading] = useState(true)
 	const [isLoadingBtn, setisLoadingBtn] = useState(false)
 	const pathname = usePathname()
 
@@ -27,18 +27,10 @@ const PizzasCard = ({ pizza }: Props) => {
 			scroll={false}
 		>
 			<div className={styles.card}>
-				<div className={styles.imgBlock}>
-					{isLoading && <Skeleton className={styles.imgSkeleton} />}
-					<Image
-						src={pizza.imageUrl}
-						alt={pizza.name}
-						width={212}
-						height={212}
-						loading="lazy"
-						onLoad={() => setisLoading(false)}
-					/>
-				</div>
-
+				<PizzaCardImage
+					src={pizza.imageUrl}
+					alt={pizza.name}
+				/>
 				<Text className={styles.cardName}>{pizza.name}</Text>
 				<Text
 					className={styles.cardDescription}

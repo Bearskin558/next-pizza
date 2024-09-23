@@ -1,29 +1,17 @@
-"use client"
-
+import { signIn } from "@/lib/auth/auth"
 import { Button, Menu, MenuDropdown, MenuItem, MenuTarget, Text } from "@mantine/core"
 import { GithubIcon, GoogleIcon, UserIcon } from "hugeicons-react"
-import { signIn } from "next-auth/react"
-import { useState } from "react"
 import { Colors } from "@/constants/colors"
 import styles from "./SignInBtn.module.scss"
 
-type Auth = "google" | "github"
-
 const SignInBtn = () => {
-	const [isLoading, setIsLoading] = useState(false)
-
-	const onClickAuthButton = (authType: Auth) => {
-		setIsLoading(true)
-		signIn(authType)
-	}
-
 	return (
 		<Menu>
 			<MenuTarget>
 				<Button
 					className={styles.signIn}
 					variant="outline"
-					loading={isLoading}
+					// loading={isLoading}
 				>
 					<div className={styles.inner}>
 						<UserIcon
@@ -40,7 +28,7 @@ const SignInBtn = () => {
 				</Button>
 			</MenuTarget>
 			<MenuDropdown>
-				<MenuItem
+				{/* <MenuItem
 					leftSection={<GithubIcon />}
 					type="submit"
 					onClick={() => onClickAuthButton("github")}
@@ -54,7 +42,33 @@ const SignInBtn = () => {
 					onClick={() => onClickAuthButton("google")}
 				>
 					Google
-				</MenuItem>
+				</MenuItem> */}
+				<form
+					action={async () => {
+						"use server"
+						await signIn("google")
+					}}
+				>
+					<MenuItem
+						leftSection={<GoogleIcon />}
+						type="submit"
+					>
+						Google
+					</MenuItem>
+				</form>
+				<form
+					action={async () => {
+						"use server"
+						await signIn("github")
+					}}
+				>
+					<MenuItem
+						leftSection={<GithubIcon />}
+						type="submit"
+					>
+						Github
+					</MenuItem>
+				</form>
 			</MenuDropdown>
 		</Menu>
 	)

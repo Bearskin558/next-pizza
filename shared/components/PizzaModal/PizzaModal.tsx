@@ -3,14 +3,14 @@
 import { useIngredientsStore } from "@/shared/store/ingredients"
 import Modal from "@/shared/ui/Modal/Modal"
 import { DoughValue, Ingredient, Pizza, PizzaSizeName } from "@/types/pizzas"
-import { Button, Text, Title } from "@mantine/core"
+import { Text, Title } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import DoughControl from "../DoughControl/DoughControl"
 import IngredientsContainer from "../IngredientsContainer/IngredientsContainer"
-import PizzaModalAddButton from "../PizzaModalAddButton/PizzaModalAddButton"
+import PizzaAddButton from "../PizzaAddButton/PizzaAddButton"
 import PizzaSizeControl from "../PizzaSizeControl/PizzaSizeControl"
 import styles from "./PizzaModal.module.scss"
 
@@ -69,7 +69,7 @@ const PizzaModal = ({ pizza }: Props) => {
 							checkedIngredients={checkedIngredients}
 						/>
 					</div>
-					<PizzaModalAddButton price={currentPrice} />
+					<PizzaAddButton price={currentPrice} />
 				</div>
 			</div>
 		</Modal>

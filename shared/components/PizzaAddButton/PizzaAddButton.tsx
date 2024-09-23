@@ -1,19 +1,14 @@
 import { Button, Tooltip } from "@mantine/core"
 import { useSession } from "next-auth/react"
-import PizzaPrice from "../PizzaModal/PizzaPrice"
-import styles from "./PizzaModalAddButton.module.scss"
+import AddButtonPrice from "../AddButtonPrice/AddButtonPrice"
+import styles from "./PizzaAddButton.module.scss"
 
 interface Props {
 	price: number
 }
 
-const PizzaModalAddButton = ({ price }: Props) => {
+const PizzaAddButton = ({ price }: Props) => {
 	const { data: session } = useSession()
-	console.log(session)
-
-	const onClickHanler = () => {
-		if (!session) 1
-	}
 
 	return (
 		<Tooltip
@@ -24,7 +19,7 @@ const PizzaModalAddButton = ({ price }: Props) => {
 		>
 			<Button
 				className={styles.addButton}
-				rightSection={<PizzaPrice price={price} />}
+				rightSection={<AddButtonPrice price={price} />}
 				disabled={!session}
 			>
 				Добавить в корзину
@@ -33,4 +28,4 @@ const PizzaModalAddButton = ({ price }: Props) => {
 	)
 }
 
-export default PizzaModalAddButton
+export default PizzaAddButton
