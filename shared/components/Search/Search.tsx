@@ -50,6 +50,7 @@ const Search = () => {
 	const resetHandler = () => {
 		setSearchValue("")
 		setFilteredPizzas([])
+		setIsLoading(false)
 	}
 
 	const onBlurHandler = () => {

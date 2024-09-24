@@ -1,0 +1,16 @@
+{
+	"sqltools.connections": [
+		{
+			"pgOptions": {
+				"ssl": {
+					"rejectUnauthorized": true
+				}
+			},
+			"previewLimit": 50,
+			"server": "localhost",
+			"driver": "PostgreSQL",
+			"name": "Pizza",
+			"connectString": "postgres://default:qBZ1h8pwdzaS@ep-misty-bonus-a25zyytb-pooler.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15"
+		}
+	]
+}

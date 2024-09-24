@@ -1,6 +1,6 @@
-import { prisma } from "@/lib/auth/auth"
 import ingredients from "./ingredients"
 import pizzas, { PizzaSizeSeed } from "./pizzas"
+import { prisma } from "./prisma-client"
 
 const up = async () => {
 	await prisma.ingredient.createMany({
@@ -47,6 +47,10 @@ const down = async () => {
 	await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE`
 	await prisma.$executeRaw`TRUNCATE TABLE "Pizza" RESTART IDENTITY CASCADE`
 	await prisma.$executeRaw`TRUNCATE TABLE "PizzaSize" RESTART IDENTITY CASCADE`
+	await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE`
+	await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE`
+	await prisma.$executeRaw`TRUNCATE TABLE "Session" RESTART IDENTITY CASCADE`
+	await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`
 }
 const seed = async () => {
 	try {

@@ -1,16 +1,8 @@
+import { prisma } from "@/prisma/prisma-client"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { Pool } from "@neondatabase/serverless"
-import { PrismaNeon } from "@prisma/adapter-neon"
-import { PrismaClient } from "@prisma/client"
 import NextAuth, { NextAuthConfig } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
-
-const neon = new Pool({
-	connectionString: process.env.POSTGRES_PRISMA_URL,
-})
-const adapter = new PrismaNeon(neon)
-export const prisma = new PrismaClient({ adapter })
 
 export const authConfig: NextAuthConfig = {
 	providers: [

@@ -1,9 +1,7 @@
 import { signIn } from "@/lib/auth/auth"
-import { ActionIcon, Button, Menu, MenuDropdown, MenuItem, MenuLabel, MenuTarget, Text } from "@mantine/core"
+import { Menu, MenuDropdown, MenuItem, MenuLabel, MenuTarget, Text } from "@mantine/core"
 import { GithubIcon, GoogleIcon, UserIcon } from "hugeicons-react"
-import { Colors } from "@/constants/colors"
 import HeaderButton from "../HeaderButton/HeaderButton"
-import styles from "./SignInBtn.module.scss"
 
 const SignInBtn = () => {
 	return (

@@ -3,6 +3,7 @@
 import { ActionIcon, Avatar, Button, Menu, MenuDropdown, MenuItem, MenuTarget } from "@mantine/core"
 import { BorderFullIcon, LogoutCircle02Icon } from "hugeicons-react"
 import { signOut } from "next-auth/react"
+import Image from "next/image"
 import styles from "./ProfileButton.module.scss"
 
 interface Props {
@@ -17,9 +18,12 @@ const ProfileButton = ({ imageUrl }: Props) => {
 					variant="transparent"
 					className={styles.button}
 				>
-					<Avatar
-						src={imageUrl}
-						size={50}
+					<Image
+						className={styles.avatar}
+						src={imageUrl || ""}
+						alt="img"
+						width={50}
+						height={50}
 					/>
 				</ActionIcon>
 			</MenuTarget>

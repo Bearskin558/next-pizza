@@ -25,6 +25,7 @@ const PizzasCard = ({ pizza }: Props) => {
 		<Link
 			href={`/pizzas/${pizza.id}`}
 			scroll={false}
+			onClick={() => setisLoadingBtn(true)}
 		>
 			<div className={styles.card}>
 				<PizzaCardImage

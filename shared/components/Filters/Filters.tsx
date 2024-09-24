@@ -94,22 +94,23 @@ const Filters = ({ ingredients }: Props) => {
 					setIngredients={setCheckedIngredients}
 					checkedIngredients={checkedIngredients}
 				/>
-				<Button
-					className={styles.button}
-					disabled={isEqualFilterStores}
-					onClick={applyHandler}
-				>
-					Применить
-				</Button>
-
-				<Button
-					color="red"
-					className={styles.button}
-					disabled={isInitialState && isEqualFilterStores}
-					onClick={resetHandler}
-				>
-					Сбросить фильтры
-				</Button>
+				<div className={styles.buttonBlock}>
+					<Button
+						color="red"
+						className={styles.button}
+						disabled={isInitialState && isEqualFilterStores}
+						onClick={resetHandler}
+					>
+						Сбросить фильтры
+					</Button>
+					<Button
+						className={styles.button}
+						disabled={isEqualFilterStores}
+						onClick={applyHandler}
+					>
+						Применить
+					</Button>
+				</div>
 			</div>
 		</div>
 	)

@@ -11,6 +11,7 @@ export interface Pizza {
 interface Size {
 	size: PizzaSizeName
 	price: number
+	id: string
 }
 
 export interface Ingredient {

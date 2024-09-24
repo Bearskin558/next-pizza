@@ -14,11 +14,14 @@ interface Props {
 
 const PriceFilter = ({ minPrice, maxPrice, setMinPrice, setMaxPrice }: Props) => {
 	const onChangeInputMinValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		if (+e.currentTarget.value >= maxPrice) return setMinPrice(maxPrice - 10)
 		setMinPrice(+e.target.value)
+		e.currentTarget.value = +e.target.value + ""
 	}
 
 	const onChangeInputMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		setMaxPrice(+e.target.value)
+		e.currentTarget.value = +e.target.value + ""
 	}
 
 	const onChangeInputSlider = (values: RangeSliderValue) => {
