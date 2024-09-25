@@ -1,20 +1,16 @@
-import { CartItem } from "@/types/cart"
+import { CartItemRequestData } from "@/types/cart"
 import { create } from "zustand"
 
 interface CartStore {
-	cartItems: CartItem[]
+	cartItems: CartItemRequestData[]
 	totalPrice: number
-	setCartItem: (cartItem: CartItem) => void
-	deleteCartItem: (id: string) => void
+	updateCart: (cartItems: CartItemRequestData[]) => void
 }
 
 export const cartStore = create<CartStore>((set, get) => ({
 	cartItems: [],
 	totalPrice: 0,
-	setCartItem: (cartItem: CartItem) => {
-		set({ cartItems: [...get().cartItems, cartItem] })
-	},
-	deleteCartItem: (id: string) => {
-		set({ cartItems: get().cartItems.filter(item => item.id !== id) })
+	updateCart: (cartItems: CartItemRequestData[]) => {
+		set({ cartItems })
 	},
 }))

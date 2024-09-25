@@ -22,6 +22,7 @@ const PizzaModal = ({ pizza }: Props) => {
 	const router = useRouter()
 	const [isOpen, { close }] = useDisclosure(true)
 	const ingredients = useIngredientsStore(state => state.ingredients)
+	console.log(ingredients.reduce((str, item) => str + item.name, ""))
 	const [checkedIngredients, setCheckedIngredients] = useState<Ingredient[]>([])
 	const [currentDoughType, setCurrentDoughType] = useState<DoughValue>("traditional")
 	const [currentPizzaSize, setCurrentPizzaSize] = useState<PizzaSizeName>("SMALL")

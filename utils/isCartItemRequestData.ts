@@ -1,12 +1,16 @@
 import { CartItemRequestData } from "@/types/cart"
 
-const isCartItemRequestData = (data: unknown): data is CartItemRequestData[] => {
-	if (!Array.isArray(data)) return false
-	if ("toppings" in data && Array.isArray(data.toppings) && data.some(item => typeof item !== "string")) return false
-	return data.reduce((result, item) => {
-		if (typeof item !== "object") return false
-		return "pizzaId" in item && "cartId" in item && "pizzaSizeId" in item && result
-	}, true)
+export const isCartItemRequestPatchData = (data: unknown): data is CartItemRequestData => {
+	if (typeof data !== "object" || !data) return false
+	if ("toppings" in data && !Array.isArray(data.toppings)) return false
+	return (
+		// "id" in data &&
+		"cartId" in data && "pizzaId" in data && "pizzaSizeId" in data && "count" in data && "pizzaDoughType" in data
+	)
 }
 
-export default isCartItemRequestData
+export const isCartItemRequestPostData = (data: unknown): data is Omit<CartItemRequestData, "id"> => {
+	if (typeof data !== "object" || !data) return false
+	if ("toppings" in data && !Array.isArray(data.toppings)) return false
+	return "cartId" in data && "pizzaId" in data && "pizzaSizeId" in data && "count" in data && "pizzaDoughType" in data
+}

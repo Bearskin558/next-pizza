@@ -23,25 +23,25 @@ model Pizza {
 }
 
 model PizzaSize {
-  id        String   @id @default(cuid())
+  id        String     @id @default(cuid())
   size      Size
   price     Int
-  pizza     Pizza?    @relation(fields: [pizzaId], references: [id], onDelete: Cascade)
+  pizza     Pizza?     @relation(fields: [pizzaId], references: [id], onDelete: Cascade)
   pizzaId   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  cartItem CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  cartItem  CartItem[]
 }
 
 model Ingredient {
-  id         String   @id @default(cuid())
-  name       String
-  imageUrl   String
-  price      Int
-  pizzas     Pizza[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  cartItem   CartItem[]
+  id        String     @id @default(cuid())
+  name      String
+  imageUrl  String
+  price     Int
+  pizzas    Pizza[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  cartItem  CartItem[]
 }
 
 enum Size {
@@ -68,16 +68,23 @@ model Cart {
 }
 
 model CartItem {
-  id        String       @id @default(cuid())
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  cart      Cart         @relation(fields: [cartId], references: [id])
-  cartId    String
-  pizza     Pizza        @relation(fields: [pizzaId], references: [id])
-  pizzaId   String
-  pizzaSize PizzaSize @relation(fields: [pizzaSizeId], references: [id])
-  pizzaSizeId String
-  toppings  Ingredient[]
+  id             String         @id @default(cuid())
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  cart           Cart           @relation(fields: [cartId], references: [id])
+  cartId         String
+  pizza          Pizza          @relation(fields: [pizzaId], references: [id])
+  pizzaId        String
+  pizzaSize      PizzaSize      @relation(fields: [pizzaSizeId], references: [id])
+  pizzaDoughType PizzaDoughType
+  pizzaSizeId    String
+  toppings       Ingredient[]
+  count          Int            @default(1)
+}
+
+enum PizzaDoughType {
+  TRADITIONAL
+  THIN
 }
 
 model User {
