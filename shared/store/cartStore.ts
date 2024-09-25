@@ -1,16 +1,27 @@
-import { CartItemRequestData } from "@/types/cart"
+import { CartItem } from "@prisma/client"
 import { create } from "zustand"
 
 interface CartStore {
-	cartItems: CartItemRequestData[]
-	totalPrice: number
-	updateCart: (cartItems: CartItemRequestData[]) => void
+	cartId: string
+	cartItems: CartItem[]
+	setCartItems: (cartItems: CartItem[]) => void
+	setCartId: (id: string) => void
+	resetCart: () => void
 }
 
-export const cartStore = create<CartStore>((set, get) => ({
+export const useCartStore = create<CartStore>((set, get) => ({
+	cartId: "",
 	cartItems: [],
-	totalPrice: 0,
-	updateCart: (cartItems: CartItemRequestData[]) => {
+	setCartId: id => {
+		set({ cartId: id })
+	},
+	setCartItems: cartItems => {
 		set({ cartItems })
+	},
+	resetCart: () => {
+		set({
+			cartId: "",
+			cartItems: [],
+		})
 	},
 }))

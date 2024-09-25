@@ -1,7 +1,10 @@
 "use client"
 
+import { postCartItem } from "@/app/api/fetch/cartItem"
+import { useCartStore } from "@/shared/store/cartStore"
 import { useIngredientsStore } from "@/shared/store/ingredients"
 import Modal from "@/shared/ui/Modal/Modal"
+import { CartItemRequestPostData } from "@/types/cart"
 import { DoughValue, Ingredient, Pizza, PizzaSizeName } from "@/types/pizzas"
 import { CloseButton, Text, Title } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
@@ -20,11 +23,12 @@ interface Props {
 
 const PizzaModal = ({ pizza }: Props) => {
 	const router = useRouter()
+	const [cartId, setCartItems] = useCartStore(state => [state.cartId, state.setCartItems])
+	const [isLoadingAddButton, setIsLoadingAddButton] = useState(false)
 	const [isOpen, { close }] = useDisclosure(true)
 	const ingredients = useIngredientsStore(state => state.ingredients)
-	console.log(ingredients.reduce((str, item) => str + item.name, ""))
 	const [checkedIngredients, setCheckedIngredients] = useState<Ingredient[]>([])
-	const [currentDoughType, setCurrentDoughType] = useState<DoughValue>("traditional")
+	const [currentDoughType, setCurrentDoughType] = useState<DoughValue>("TRADITIONAL")
 	const [currentPizzaSize, setCurrentPizzaSize] = useState<PizzaSizeName>("SMALL")
 	const currentPrice =
 		pizza.sizes.find(size => size.size === currentPizzaSize)?.price! +
@@ -33,6 +37,32 @@ const PizzaModal = ({ pizza }: Props) => {
 		router.back()
 		close()
 	}
+
+	const addHandler = async () => {
+		setIsLoadingAddButton(true)
+		const pizzaSizeId = pizza.sizes.find(size => size.size === currentPizzaSize)?.id
+		const toppings = checkedIngredients.map(item => item.id)
+		if (!pizzaSizeId) {
+			console.log(pizza.sizes)
+			setIsLoadingAddButton(false)
+			return console.warn("Не найден нужный размер пиццы")
+		}
+		const cartItem: CartItemRequestPostData = {
+			cartId,
+			count: 1,
+			pizzaId: pizza.id,
+			pizzaDoughType: currentDoughType,
+			pizzaSizeId,
+			toppings,
+		}
+		const response = await postCartItem(cartItem)
+		if (response.status === 201) {
+			setCartItems(response.data)
+			close()
+		}
+		setIsLoadingAddButton(false)
+	}
+
 	return (
 		<Modal
 			onClose={onCloseModal}
@@ -74,7 +104,11 @@ const PizzaModal = ({ pizza }: Props) => {
 							checkedIngredients={checkedIngredients}
 						/>
 					</div>
-					<PizzaAddButton price={currentPrice} />
+					<PizzaAddButton
+						price={currentPrice}
+						onClick={addHandler}
+						isLoading={isLoadingAddButton}
+					/>
 				</div>
 				<CloseButton
 					onClick={onCloseModal}

@@ -7,6 +7,7 @@ body {
 	font-size: 16px;
 	line-height: 22px;
 	--accent-color: #f4511e;
+	--background-color: #242424;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	scroll-behavior: smooth;

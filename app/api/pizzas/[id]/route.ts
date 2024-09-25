@@ -17,6 +17,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 				select: {
 					size: true,
 					price: true,
+					id: true,
 				},
 			},
 			ingredients: {

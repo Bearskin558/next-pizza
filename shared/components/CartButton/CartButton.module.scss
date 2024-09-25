@@ -1,0 +1,50 @@
+.wrapper {
+	position: relative;
+	transition: all ease-in-out 0.1s;
+	&:active {
+		transform: translateY(-2px);
+	}
+}
+.count {
+	font-size: 18px;
+}
+.label {
+	height: fit-content;
+}
+.separate {
+	width: 1px;
+	height: 20px;
+	background-color: var(--accent-color);
+	display: block;
+}
+
+.countWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	top: -6px;
+	right: -1px;
+	font-size: 18px;
+	color: var(--accent-color);
+	background-color: var(--background-color);
+}
+.button {
+	height: 50px;
+}
+@media (max-width: 768px) {
+	.button {
+		height: 35px;
+	}
+	.count {
+		font-size: 16px;
+	}
+	.countWrapper {
+		width: 15px;
+		height: 15px;
+		font-size: 12px;
+	}
+}

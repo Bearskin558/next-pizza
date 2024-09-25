@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth/auth"
 import clsx from "clsx"
 import { ShoppingCart02Icon } from "hugeicons-react"
 import { Colors } from "@/constants/colors"
+import CartButton from "../CartButton/CartButton"
 import HeaderButton from "../HeaderButton/HeaderButton"
 import Logo from "../Logo/Logo"
 import ProfileButton from "../ProfileButton/ProfileButton"
@@ -21,7 +22,7 @@ async function Header() {
 				<div className={styles.btnBlock}>
 					{session && <ProfileButton imageUrl={session.user?.image} />}
 					{session === null && <SignInBtn />}
-					<HeaderButton Icon={ShoppingCart02Icon} />
+					<CartButton />
 				</div>
 			</div>
 		</header>

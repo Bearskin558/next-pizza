@@ -1,11 +1,12 @@
 import Categories from "@/shared/components/Categories"
 import Filters from "@/shared/components/Filters"
 import PizzasContainer from "@/shared/components/PizzasContainer/PizzasContainer"
-import { Ingredient, Pizza } from "@/types/pizzas"
 import { Title } from "@mantine/core"
 import { getAllIngredients } from "../api/fetch/getAllIngredients"
 import { getAllPizzas } from "../api/fetch/pizza"
 import styles from "./page.module.css"
+
+export const revalidate = 10
 
 export default async function Home() {
 	const { data: ingredients } = await getAllIngredients()

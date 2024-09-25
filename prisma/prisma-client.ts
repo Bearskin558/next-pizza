@@ -16,6 +16,11 @@ import ws from "ws"
 // neonConfig.webSocketConstructor = ws
 const neon = new Pool({
 	connectionString: process.env.POSTGRES_PRISMA_URL,
+	connectionTimeoutMillis: 1000,
+	idleTimeoutMillis: 1000,
+	ssl: {
+		rejectUnauthorized: false,
+	},
 })
 const adapter = new PrismaNeon(neon)
 export const prisma = new PrismaClient({ adapter })

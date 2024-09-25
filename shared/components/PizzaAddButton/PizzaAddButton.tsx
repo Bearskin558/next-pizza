@@ -5,9 +5,11 @@ import styles from "./PizzaAddButton.module.scss"
 
 interface Props {
 	price: number
+	onClick: () => void
+	isLoading: boolean
 }
 
-const PizzaAddButton = ({ price }: Props) => {
+const PizzaAddButton = ({ price, onClick, isLoading }: Props) => {
 	const { data: session } = useSession()
 
 	return (
@@ -21,6 +23,8 @@ const PizzaAddButton = ({ price }: Props) => {
 				className={styles.addButton}
 				rightSection={<AddButtonPrice price={price} />}
 				disabled={!session}
+				onClick={onClick}
+				loading={isLoading}
 			>
 				Добавить в корзину
 			</Button>

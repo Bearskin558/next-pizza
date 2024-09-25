@@ -24,17 +24,22 @@ class HttpClient {
 	}
 
 	get<T>(url: string, nextConfig?: NextFetchRequestConfig) {
-		console.warn(`GET ${url}`)
+		// console.warn(`GET ${url}`)
 		return this.request<T>(url, "GET", nextConfig)
 	}
 
 	post<T>(url: string, nextConfig?: NextFetchRequestConfig, body: Record<string, any> | string = {}) {
-		console.warn(`POST ${url}`)
+		// console.warn(`POST ${url}`)
 		return this.request<T>(url, "POST", nextConfig, body)
 	}
 
+	patch<T>(url: string, nextConfig?: NextFetchRequestConfig, body: Record<string, any> | string = {}) {
+		// console.warn(`PATCH ${url}`)
+		return this.request<T>(url, "PATCH", nextConfig, body)
+	}
+
 	delete<T>(url: string, nextConfig?: NextFetchRequestConfig, body: Record<string, any> | string = {}) {
-		console.warn(`DELETE ${url}`)
+		// console.warn(`DELETE ${url}`)
 		return this.request<T>(url, "DELETE", nextConfig)
 	}
 }

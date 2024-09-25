@@ -15,17 +15,17 @@ interface Props {
 const doughData: DoughData[] = [
 	{
 		label: "традиционное",
-		value: "traditional",
+		value: "TRADITIONAL",
 	},
 	{
 		label: "тонкое",
-		value: "thin",
+		value: "THIN",
 	},
 ]
 
 const DoughControl = ({ value, onChange }: Props) => {
 	const onChangeHandler = (value: string) => {
-		if (value === "thin" || value === "traditional") onChange(value)
+		if (value === "THIN" || value === "TRADITIONAL") onChange(value)
 	}
 	return (
 		<SegmentedControl

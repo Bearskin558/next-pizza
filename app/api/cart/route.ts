@@ -1,5 +1,4 @@
 import { prisma } from "@/prisma/prisma-client"
-import isCartItemRequestData from "@/utils/isCartItemRequestData"
 import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -8,22 +7,34 @@ export async function GET(req: NextRequest) {
 	const token = cookieStore.get("authjs.session-token")
 	if (!token) return NextResponse.json("Пользователь не авторизован", { status: 401 })
 	try {
-		const cart = (
-			await prisma.session.findFirst({
-				where: {
-					sessionToken: token.value,
-				},
-				select: {
-					user: {
-						select: {
-							cart: true,
-						},
+		const user = await prisma.user.findFirst({
+			where: {
+				sessions: {
+					some: {
+						sessionToken: token.value,
 					},
 				},
+			},
+			select: {
+				id: true,
+				cart: {
+					select: {
+						id: true,
+					},
+				},
+			},
+		})
+		if (!user) return NextResponse.json("Пользователь не авторизован", { status: 401 })
+
+		if (!user.cart) {
+			const cart = await prisma.cart.create({
+				data: {
+					userId: user.id,
+				},
 			})
-		)?.user.cart
-		if (!cart) NextResponse.json("Корзина не найдена", { status: 404 })
-		return NextResponse.json(cart, { status: 200 })
+			return NextResponse.json(cart, { status: 200 })
+		}
+		return NextResponse.json(user.cart, { status: 200 })
 	} catch (error) {
 		NextResponse.json(error, { status: 500 })
 	}
