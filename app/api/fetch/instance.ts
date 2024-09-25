@@ -9,12 +9,16 @@ class HttpClient {
 	private async request<T>(
 		endpoint: string,
 		method: RequestInit["method"],
-		nextConfig?: NextFetchRequestConfig,
+		config?: RequestInit,
 		body?: Record<string, any> | string,
 	) {
 		let url = `${this.baseUrl}/${endpoint}`
-		const config = { method, next: nextConfig }
-		const response = await fetch(url, { ...config, ...(body && { body: JSON.stringify(body) }) })
+
+		const response = await fetch(url, {
+			method,
+			...config,
+			...(body && { body: JSON.stringify(body) }),
+		})
 		return {
 			success: response.ok,
 			status: response.status,
@@ -23,24 +27,24 @@ class HttpClient {
 		}
 	}
 
-	get<T>(url: string, nextConfig?: NextFetchRequestConfig) {
+	get<T>(url: string, config?: RequestInit) {
 		// console.warn(`GET ${url}`)
-		return this.request<T>(url, "GET", nextConfig)
+		return this.request<T>(url, "GET", config)
 	}
 
-	post<T>(url: string, nextConfig?: NextFetchRequestConfig, body: Record<string, any> | string = {}) {
+	post<T>(url: string, config?: RequestInit, body: Record<string, any> | string = {}) {
 		// console.warn(`POST ${url}`)
-		return this.request<T>(url, "POST", nextConfig, body)
+		return this.request<T>(url, "POST", config, body)
 	}
 
-	patch<T>(url: string, nextConfig?: NextFetchRequestConfig, body: Record<string, any> | string = {}) {
+	patch<T>(url: string, config?: RequestInit, body: Record<string, any> | string = {}) {
 		// console.warn(`PATCH ${url}`)
-		return this.request<T>(url, "PATCH", nextConfig, body)
+		return this.request<T>(url, "PATCH", config, body)
 	}
 
-	delete<T>(url: string, nextConfig?: NextFetchRequestConfig, body: Record<string, any> | string = {}) {
+	delete<T>(url: string, config?: RequestInit, body: Record<string, any> | string = {}) {
 		// console.warn(`DELETE ${url}`)
-		return this.request<T>(url, "DELETE", nextConfig)
+		return this.request<T>(url, "DELETE", config)
 	}
 }
 

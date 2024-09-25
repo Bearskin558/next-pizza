@@ -1,7 +1,7 @@
 import { prisma } from "@/prisma/prisma-client"
 import { NextRequest, NextResponse } from "next/server"
 
-export const revalidate = 10
+export const revalidate = 0
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
 	const token = req.cookies.get("authjs.session-token")

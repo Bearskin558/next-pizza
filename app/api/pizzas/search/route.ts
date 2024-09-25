@@ -1,7 +1,7 @@
 import { prisma } from "@/prisma/prisma-client"
 import { NextRequest, NextResponse } from "next/server"
 
-export const revalidate = 10
+export const revalidate = 3600
 
 export async function GET(request: NextRequest) {
 	const queryValue = request.nextUrl.searchParams.get("query") || ""

@@ -1,7 +1,7 @@
 import { prisma } from "@/prisma/prisma-client"
 import { NextResponse } from "next/server"
 
-export const revalidate = 10
+export const revalidate = 3600
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
 	const pizzas = await prisma.pizza.findFirst({

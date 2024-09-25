@@ -1,15 +1,12 @@
 "use client"
 
 import { getCart } from "@/app/api/fetch/cart"
-import { getAllCartItems } from "@/app/api/fetch/cartItem"
 import { useCartStore } from "@/shared/store/cartStore"
 import { Button } from "@mantine/core"
 import { ShoppingCart02Icon } from "hugeicons-react"
-import MotionNumber from "motion-number"
 import { useSession } from "next-auth/react"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Colors } from "@/constants/colors"
-import HeaderButton from "../HeaderButton/HeaderButton"
 import styles from "./CartButton.module.scss"
 
 const CartButton = () => {
@@ -20,36 +17,25 @@ const CartButton = () => {
 		state.setCartItems,
 		state.cartItems,
 	])
+	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
 		const fetchCart = async () => {
 			const response = await getCart()
-			if (response.status === 200) setCartId(response.data.id)
-		}
-
-		const fetchCartItems = async () => {
-			const response = await getAllCartItems()
-
 			if (response.status === 200) {
-				setCartItems(response.data)
+				setCartId(response.data.id)
+				setCartItems(response.data.cartItems)
 			}
 		}
 
 		if (user.status === "authenticated") {
 			fetchCart()
-			fetchCartItems()
 		}
 		if (user.status === "unauthenticated") resetCart()
+		setIsLoading(false)
 	}, [user.status])
 
 	return (
-		// <div className={styles.wrapper}>
-		// 	<HeaderButton Icon={ShoppingCart02Icon} />
-		// 	<div className={styles.countWrapper}>
-		// 		<p>{cartItems.length}</p>
-		// 	</div>
-
-		// </div>
 		<Button
 			className={styles.button}
 			variant="outline"
@@ -62,6 +48,7 @@ const CartButton = () => {
 			}
 			radius="xl"
 			classNames={{ label: styles.label }}
+			loading={isLoading}
 		>
 			<p className={styles.separate} />
 		</Button>

@@ -2,9 +2,10 @@ import { prisma } from "@/prisma/prisma-client"
 import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 
+export const revalidate = 0
+
 export async function GET(req: NextRequest) {
-	const cookieStore = cookies()
-	const token = cookieStore.get("authjs.session-token")
+	const token = req.cookies.get("authjs.session-token")
 	if (!token) return NextResponse.json("Пользователь не авторизован", { status: 401 })
 	try {
 		const user = await prisma.user.findFirst({
@@ -20,6 +21,7 @@ export async function GET(req: NextRequest) {
 				cart: {
 					select: {
 						id: true,
+						cartItems: true,
 					},
 				},
 			},
@@ -31,7 +33,11 @@ export async function GET(req: NextRequest) {
 				data: {
 					userId: user.id,
 				},
+				select: {
+					cartItems: true,
+				},
 			})
+
 			return NextResponse.json(cart, { status: 200 })
 		}
 		return NextResponse.json(user.cart, { status: 200 })

@@ -2,6 +2,8 @@ import { prisma } from "@/prisma/prisma-client"
 import { isCartItemRequestPatchData, isCartItemRequestPostData } from "@/utils/isCartItemRequestData"
 import { NextRequest, NextResponse } from "next/server"
 
+export const revalidate = 0
+
 export async function GET(req: NextRequest) {
 	const token = req.cookies.get("authjs.session-token")
 	if (!token) return NextResponse.json("Пользователь не авторизован", { status: 401 })
@@ -26,7 +28,19 @@ export async function GET(req: NextRequest) {
 		})
 		if (!user) return NextResponse.json("Пользователь не авторизован", { status: 401 })
 
-		const cartItems = await prisma.cartItem.findMany()
+		const cartItems = await prisma.cartItem.findMany({
+			where: {
+				cart: {
+					user: {
+						sessions: {
+							some: {
+								sessionToken: token.value,
+							},
+						},
+					},
+				},
+			},
+		})
 		return NextResponse.json(cartItems, { status: 200 })
 	} catch (error) {
 		NextResponse.json(error, { status: 500 })
@@ -51,7 +65,19 @@ export async function POST(req: NextRequest) {
 				},
 			},
 		})
-		const cartItems = await prisma.cartItem.findMany()
+		const cartItems = await prisma.cartItem.findMany({
+			where: {
+				cart: {
+					user: {
+						sessions: {
+							some: {
+								sessionToken: token.value,
+							},
+						},
+					},
+				},
+			},
+		})
 		return NextResponse.json(cartItems, { status: 201 })
 	} catch (error) {
 		console.log(error)
@@ -82,7 +108,19 @@ export async function PATCH(req: NextRequest) {
 				},
 			},
 		})
-		const cartItems = await prisma.cartItem.findMany()
+		const cartItems = await prisma.cartItem.findMany({
+			where: {
+				cart: {
+					user: {
+						sessions: {
+							some: {
+								sessionToken: token.value,
+							},
+						},
+					},
+				},
+			},
+		})
 		return NextResponse.json(cartItems, { status: 200 })
 	} catch (error) {
 		console.log(error)
