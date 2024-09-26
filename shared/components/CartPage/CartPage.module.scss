@@ -1,3 +1,12 @@
+.cartContainer {
+	position: relative;
+}
+.cartWrapper {
+	width: 75%;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
 .cartItemsContainer {
 	display: flex;
 	flex-direction: column;
@@ -5,7 +14,6 @@
 	gap: 50px;
 	padding: 30px;
 	background-color: rgb(50, 50, 50);
-	width: 60%;
 	border-radius: 20px;
 
 	& > div::after {

@@ -1,0 +1,26 @@
+.wrapper {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
+	background-color: #323232;
+	border-radius: 20px;
+}
+.title {
+	margin-bottom: 5px;
+	font-size: 20px;
+}
+
+.price {
+	font-size: 26px;
+	font-weight: 900;
+	margin-bottom: 20px;
+}
+.button {
+	height: 50px;
+	&Text {
+		font-size: 18px;
+	}
+}

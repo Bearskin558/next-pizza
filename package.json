@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev --turbo",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
@@ -29,6 +29,7 @@
 		"next-auth": "5.0.0-beta.21",
 		"react": "^18",
 		"react-dom": "^18",
+		"react-imask": "^7.6.1",
 		"ws": "^8.18.0",
 		"zustand": "^4.5.4"
 	},

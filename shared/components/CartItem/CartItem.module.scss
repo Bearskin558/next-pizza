@@ -1,7 +1,8 @@
 .wrapper {
 	display: flex;
+	gap: 10px;
 	align-items: center;
-	justify-content: space-between;
+	// justify-content: space-between;
 	position: relative;
 }
 .image {
@@ -12,7 +13,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
-	width: 50%;
+	width: 40%;
 	p {
 		opacity: 0.7;
 	}
@@ -30,17 +31,22 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 8%;
+	flex-grow: 1;
 }
 .buttonBlock {
 	display: flex;
 	align-items: center;
+	margin-left: auto;
 }
 .countBlock {
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	margin-right: 20px;
+}
+.count {
+	width: 20px;
+	text-align: center;
 }
 .countButton {
 	width: 35px;

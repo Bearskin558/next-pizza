@@ -8,11 +8,11 @@
 	width: 100%;
 	font-weight: 700;
 	height: 42px;
-	& label {
+	scrollbar-width: thin;
+	label {
 		height: 100%;
 		font-weight: 700;
 	}
-	scrollbar-width: thin;
 	// scrollbar-color: var(--accent-color) #1a1a1a;
 }
 @media (max-width: 768px) {

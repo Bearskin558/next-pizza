@@ -60,6 +60,7 @@ const PizzaModal = ({ pizza }: Props) => {
 			setCartItems(response.data)
 			close()
 		}
+		router.back()
 		setIsLoadingAddButton(false)
 	}
 

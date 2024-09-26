@@ -1,0 +1,23 @@
+.wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.svgBlock {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	margin-bottom: 10px;
+}
+.sadIcon {
+	position: absolute;
+	left: 48%;
+	top: 39%;
+}
+.text {
+	font-size: 28px;
+	opacity: 0.8;
+}

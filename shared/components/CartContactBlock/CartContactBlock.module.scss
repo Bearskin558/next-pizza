@@ -1,0 +1,15 @@
+.wrapper {
+	display: flex;
+	gap: 30px;
+	background-color: #303030;
+	padding: 30px;
+	border-radius: 20px;
+}
+
+.names,
+.contacts {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	gap: 10px;
+}

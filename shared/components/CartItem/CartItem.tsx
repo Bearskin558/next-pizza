@@ -80,7 +80,7 @@ const CartItem = ({ cartItem }: Props) => {
 						onClick={() => onChangeCountHandler("minus")}
 						disabled={cartItem.count === 1}
 					/>
-					<p>{cartItem.count}</p>
+					<p className={styles.count}>{cartItem.count}</p>
 					<CartItemButton
 						Icon={PlusSignIcon}
 						onClick={() => onChangeCountHandler("plus")}
