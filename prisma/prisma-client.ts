@@ -7,7 +7,8 @@
 // } & typeof global
 // export const prisma = globalThis.prismaGlobal ?? prismaClientSingleton()
 // if (process.env.NODE_ENV !== "production") globalThis.prismaGlobal = prisma
-// ___________________________________________//
+
+/*-------------------------------------------*/
 import { Pool, neonConfig } from "@neondatabase/serverless"
 import { PrismaNeon } from "@prisma/adapter-neon"
 import { PrismaClient } from "@prisma/client"

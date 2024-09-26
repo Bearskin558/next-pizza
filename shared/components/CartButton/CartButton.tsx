@@ -5,6 +5,7 @@ import { useCartStore } from "@/shared/store/cartStore"
 import { Button } from "@mantine/core"
 import { ShoppingCart02Icon } from "hugeicons-react"
 import { useSession } from "next-auth/react"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 import { Colors } from "@/constants/colors"
 import styles from "./CartButton.module.scss"
@@ -36,22 +37,24 @@ const CartButton = () => {
 	}, [user.status])
 
 	return (
-		<Button
-			className={styles.button}
-			variant="outline"
-			rightSection={<p className={styles.count}>{cartItems.length}</p>}
-			leftSection={
-				<ShoppingCart02Icon
-					color={Colors.ACCENT}
-					size={20}
-				/>
-			}
-			radius="xl"
-			classNames={{ label: styles.label }}
-			loading={isLoading}
-		>
-			<p className={styles.separate} />
-		</Button>
+		<Link href="/cart">
+			<Button
+				className={styles.button}
+				variant="outline"
+				rightSection={<p className={styles.count}>{cartItems.length}</p>}
+				leftSection={
+					<ShoppingCart02Icon
+						color={Colors.ACCENT}
+						size={20}
+					/>
+				}
+				radius="xl"
+				classNames={{ label: styles.label }}
+				loading={isLoading}
+			>
+				<p className={styles.separate} />
+			</Button>
+		</Link>
 	)
 }
 

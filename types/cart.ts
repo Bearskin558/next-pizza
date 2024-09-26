@@ -8,7 +8,28 @@ export interface Cart {
 	pizzaSize: Pick<PizzaSize, "id" | "pizzaId" | "size" | "price">
 }
 
-export type CartItemRequestPatchData = Omit<CartItem, "createdAt" | "updatedAt"> & {
+export type RequestDataToEditCountCartItem = Pick<CartItem, "id" | "count">
+export type CartItemRequestPostData = Omit<CartItem, "createdAt" | "updatedAt" | "id"> & {
 	toppings?: string[]
 }
-export type CartItemRequestPostData = Omit<CartItemRequestPatchData, "id">
+
+export type CartItemResponse = CartItem & {
+	pizza: {
+		name: string
+		id: string
+		description: string
+		imageUrl: string
+		sizes: PizzaSize[]
+	}
+	toppings: {
+		name: string
+		id: string
+		imageUrl: string
+		price: number
+	}[]
+}
+
+export interface CartResponse {
+	id: string
+	cartItems: CartItemResponse[]
+}

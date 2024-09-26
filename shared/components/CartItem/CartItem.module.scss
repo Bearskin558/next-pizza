@@ -1,0 +1,48 @@
+.wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+}
+.image {
+	width: 65px;
+	height: 65px;
+}
+.textBlock {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	width: 50%;
+	p {
+		opacity: 0.7;
+	}
+	& > p:first-of-type {
+		opacity: 1;
+		font-weight: 700;
+		font-size: 20px;
+	}
+}
+.toppings {
+	// padding-left: 10px;
+	font-size: 14px;
+}
+.price {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 8%;
+}
+.buttonBlock {
+	display: flex;
+	align-items: center;
+}
+.countBlock {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-right: 20px;
+}
+.countButton {
+	width: 35px;
+	height: 35px;
+}

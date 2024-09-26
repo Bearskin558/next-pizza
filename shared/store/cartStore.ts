@@ -1,10 +1,11 @@
+import { CartItemResponse } from "@/types/cart"
 import { CartItem } from "@prisma/client"
 import { create } from "zustand"
 
 interface CartStore {
 	cartId: string
-	cartItems: CartItem[]
-	setCartItems: (cartItems: CartItem[]) => void
+	cartItems: CartItemResponse[]
+	setCartItems: (cartItems: CartItemResponse[]) => void
 	setCartId: (id: string) => void
 	resetCart: () => void
 }

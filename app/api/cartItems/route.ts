@@ -1,6 +1,8 @@
 import { prisma } from "@/prisma/prisma-client"
-import { isCartItemRequestPatchData, isCartItemRequestPostData } from "@/utils/isCartItemRequestData"
+import { CartItemResponse } from "@/types/cart"
+import { isCartItemRequestPostData } from "@/utils/isCartItemRequestData"
 import { NextRequest, NextResponse } from "next/server"
+import { cartItemsDto } from "../cartItemsDto/cartItemsDto"
 
 export const revalidate = 0
 
@@ -40,8 +42,12 @@ export async function GET(req: NextRequest) {
 					},
 				},
 			},
+			select: cartItemsDto,
+			orderBy: {
+				createdAt: "asc",
+			},
 		})
-		return NextResponse.json(cartItems, { status: 200 })
+		return NextResponse.json<CartItemResponse[]>(cartItems, { status: 200 })
 	} catch (error) {
 		NextResponse.json(error, { status: 500 })
 	}
@@ -77,51 +83,12 @@ export async function POST(req: NextRequest) {
 					},
 				},
 			},
-		})
-		return NextResponse.json(cartItems, { status: 201 })
-	} catch (error) {
-		console.log(error)
-		NextResponse.json(error, { status: 500 })
-	}
-}
-
-export async function PATCH(req: NextRequest) {
-	const token = req.cookies.get("authjs.session-token")
-	if (!token) return NextResponse.json("Пользователь не авторизован", { status: 401 })
-
-	const requestData = await req.json()
-	if (!requestData || !isCartItemRequestPatchData(requestData)) return NextResponse.json("Bad request", { status: 400 })
-
-	try {
-		const { id, cartId, pizzaDoughType, pizzaId, count, toppings } = requestData
-		const updatedCartItem = await prisma.cartItem.update({
-			where: {
-				id,
-			},
-			data: {
-				cartId,
-				pizzaDoughType,
-				pizzaId,
-				count,
-				toppings: {
-					connect: toppings?.map(topping => ({ id: topping })),
-				},
+			select: cartItemsDto,
+			orderBy: {
+				createdAt: "asc",
 			},
 		})
-		const cartItems = await prisma.cartItem.findMany({
-			where: {
-				cart: {
-					user: {
-						sessions: {
-							some: {
-								sessionToken: token.value,
-							},
-						},
-					},
-				},
-			},
-		})
-		return NextResponse.json(cartItems, { status: 200 })
+		return NextResponse.json<CartItemResponse[]>(cartItems, { status: 201 })
 	} catch (error) {
 		console.log(error)
 		NextResponse.json(error, { status: 500 })

@@ -4,6 +4,11 @@ import { hostname } from "os"
 const nextConfig = {
 	experimental: {
 		optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+		// reactCompiler: true,
+		// staleTimes: {
+		// 	static: 1,
+		// 	dynamic: 1,
+		// },
 	},
 	images: {
 		remotePatterns: [
