@@ -3,7 +3,12 @@ import { Button } from "@mantine/core"
 import MotionNumber from "motion-number"
 import styles from "./CartTotalBlock.module.scss"
 
-const CartTotalBlock = () => {
+interface Props {
+	onClickToOrderHandler: () => void
+	isLoadingButton: boolean
+}
+
+const CartTotalBlock = ({ onClickToOrderHandler, isLoadingButton }: Props) => {
 	const cartItems = useCartStore(state => state.cartItems)
 	const totalPrice = cartItems.reduce(
 		(sum, item) =>
@@ -22,7 +27,11 @@ const CartTotalBlock = () => {
 				className={styles.price}
 			/>
 			{/* <p className={styles.price}>{totalPrice} ₽</p> */}
-			<Button className={styles.button}>
+			<Button
+				className={styles.button}
+				loading={isLoadingButton}
+				onClick={onClickToOrderHandler}
+			>
 				<p className={styles.buttonText}>Перейти к оплате</p>
 			</Button>
 		</div>

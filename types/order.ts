@@ -1,10 +1,9 @@
 export interface OrderPostRequestData {
-	orderItems: OrderPostItemRequestData[]
-	totalPrice: number
 	address: string
 	userName: string
 	userSurname: string
 	phoneNumber: string
+	email: string
 }
 
 export interface OrderPostItemRequestData {

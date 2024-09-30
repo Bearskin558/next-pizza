@@ -1,14 +1,11 @@
 import { OrderPostItemRequestData, OrderPostRequestData } from "@/types/order"
 
 export const isOrderPostRequestData = (data: unknown): data is OrderPostRequestData => {
-	if (typeof data !== "object" || data === null || !("orderItems" in data)) return false
+	if (typeof data !== "object" || data === null) return false
 	return (
-		"totalPrice" in data &&
-		"address" in data &&
-		"userName" in data &&
-		"userSurname" in data &&
-		"phoneNumber" in data &&
-		isOrderPostItemRequestData(data.orderItems)
+		// "totalPrice" in data &&
+		"address" in data && "userName" in data && "userSurname" in data && "phoneNumber" in data && "email" in data
+		// isOrderPostItemRequestData(data.orderItems)
 	)
 }
 

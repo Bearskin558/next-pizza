@@ -95,13 +95,14 @@ model Order {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String      @unique
+  userId      String
   orderItems  OrderItem[]
   totalPrice  Int         @default(0)
   address     String      @default("")
   userName    String      @default("")
   userSurname String      @default("")
   phoneNumber String      @default("")
+  email       String      @default("")
 }
 
 model OrderItem {
