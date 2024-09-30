@@ -103,6 +103,7 @@ model Order {
   userSurname String      @default("")
   phoneNumber String      @default("")
   email       String      @default("")
+  number      Int         @default(autoincrement())
 }
 
 model OrderItem {
@@ -116,6 +117,7 @@ model OrderItem {
   pizzaSize   PizzaSize    @relation(fields: [pizzaSizeId], references: [id])
   pizzaSizeId String
   toppings    Ingredient[]
+  price       Int          @default(0)
   count       Int          @default(1)
 }
 

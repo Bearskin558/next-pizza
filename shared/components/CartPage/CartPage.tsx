@@ -4,6 +4,7 @@ import { createOrder } from "@/app/api/fetch/order"
 import { useCartStore } from "@/shared/store/cartStore"
 import { isEmail, isNotEmpty, useForm } from "@mantine/form"
 import { Order } from "@prisma/client"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import CartContactBlock from "../CartContactBlock/CartContactBlock"
 import CartItem from "../CartItem/CartItem"
@@ -14,6 +15,8 @@ import styles from "./CartPage.module.scss"
 export type ContactsForm = Pick<Order, "email" | "address" | "userName" | "userSurname" | "phoneNumber">
 
 const CartPage = () => {
+	const resetCart = useCartStore(state => state.resetCart)
+	const router = useRouter()
 	const cartItems = useCartStore(state => state.cartItems)
 	const [isLoadingTotalBlockButton, setIsLoadingTotalBlockButton] = useState(false)
 	const contactsForm = useForm<ContactsForm>({
@@ -44,7 +47,11 @@ const CartPage = () => {
 				phoneNumber: contactsForm.values.phoneNumber,
 				email: contactsForm.values.email,
 			})
-			console.log(response.data)
+
+			if (response.status === 200) {
+				resetCart()
+				router.push("/orders")
+			}
 		} catch (error) {
 			console.log(error)
 		} finally {

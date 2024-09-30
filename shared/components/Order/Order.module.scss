@@ -1,0 +1,22 @@
+.wrapper {
+	background-color: #323232;
+	padding: 30px;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+.orderItems {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.orderItemsContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+.title {
+	font-size: 24px;
+	font-weight: 500;
+}

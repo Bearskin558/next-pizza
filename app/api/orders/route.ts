@@ -1,6 +1,10 @@
 import { prisma } from "@/prisma/prisma-client"
+import { ResponseOrder } from "@/types/order"
 import { isOrderPostRequestData } from "@/utils/isOrderPostRequestData"
+import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
+
+export const revalidate = 0
 
 export async function GET(req: NextRequest) {
 	const token = req.cookies.get("authjs.session-token")
@@ -18,13 +22,18 @@ export async function GET(req: NextRequest) {
 				select: {
 					id: true,
 					address: true,
+					createdAt: true,
+					number: true,
+					totalPrice: true,
 					orderItems: {
 						select: {
 							count: true,
 							id: true,
+							price: true,
 							pizza: {
 								select: {
 									id: true,
+									name: true,
 									imageUrl: true,
 								},
 							},
@@ -37,11 +46,15 @@ export async function GET(req: NextRequest) {
 						},
 					},
 				},
+				orderBy: {
+					createdAt: "desc",
+				},
 			},
 		},
 	})
 	if (!user) return NextResponse.json("Пользователь не авторизован", { status: 401 })
-	return NextResponse.json(user.orders, { status: 200 })
+	if (!user.orders) return NextResponse.json("Заказы не найдены", { status: 404 })
+	return NextResponse.json<ResponseOrder[]>(user.orders, { status: 200 })
 }
 
 export async function POST(req: NextRequest) {
@@ -95,7 +108,7 @@ export async function POST(req: NextRequest) {
 				},
 			},
 		})
-
+		if (cartItems.length === 0) return NextResponse.json("Корзина пуста", { status: 400 })
 		const { address, userName, userSurname, phoneNumber, email } = requestData
 
 		const totalPrice = cartItems.reduce((sum, item) => {
@@ -125,6 +138,7 @@ export async function POST(req: NextRequest) {
 						toppings: {
 							connect: item.toppings.map(topping => ({ id: topping.id })),
 						},
+						price: (item.pizzaSize.price + item.toppings.reduce((sum, topping) => sum + topping.price, 0)) * item.count,
 					},
 				})
 			}),
