@@ -56,24 +56,26 @@ const CartItem = ({ cartItem }: Props) => {
 
 	return (
 		<div className={styles.wrapper}>
-			<Image
-				src={cartItem.pizza.imageUrl}
-				alt={cartItem.pizza.name}
-				width={100}
-				height={100}
-				className={styles.image}
-			/>
-			<div className={styles.textBlock}>
-				<p>{cartItem.pizza.name}</p>
-				<p>
-					{pizzaSizes[pizzaSize.size]} см, {doughs[cartItem.pizzaDoughType]} тесто
-				</p>
-				{cartItem.toppings.length > 0 && <p className={styles.toppings}>Дополнительные ингредиенты: {toppings}</p>}
-			</div>
-			<div className={styles.price}>
-				<p>{price} ₽</p>
+			<div className={styles.descriptionBlock}>
+				<Image
+					src={cartItem.pizza.imageUrl}
+					alt={cartItem.pizza.name}
+					width={100}
+					height={100}
+					className={styles.image}
+				/>
+				<div className={styles.textBlock}>
+					<p>{cartItem.pizza.name}</p>
+					<p>
+						{pizzaSizes[pizzaSize.size]} см, {doughs[cartItem.pizzaDoughType]} тесто
+					</p>
+					{cartItem.toppings.length > 0 && <p className={styles.toppings}>Дополнительные ингредиенты: {toppings}</p>}
+				</div>
 			</div>
 			<div className={styles.buttonBlock}>
+				<div className={styles.price}>
+					<p>{price} ₽</p>
+				</div>
 				<div className={styles.countBlock}>
 					<CartItemButton
 						Icon={MinusSignIcon}
@@ -86,12 +88,14 @@ const CartItem = ({ cartItem }: Props) => {
 						onClick={() => onChangeCountHandler("plus")}
 					/>
 				</div>
-				<CartItemButton
-					Icon={MultiplicationSignIcon}
-					onClick={onDeleteHandler}
-					variant="transparent"
-				/>
 			</div>
+
+			<CartItemButton
+				Icon={MultiplicationSignIcon}
+				onClick={onDeleteHandler}
+				variant="transparent"
+				className={styles.deleteButton}
+			/>
 		</div>
 	)
 }

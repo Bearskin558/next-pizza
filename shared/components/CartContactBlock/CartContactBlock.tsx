@@ -9,6 +9,7 @@ const CartContactBlock = () => {
 				<TextInput
 					label="Имя:"
 					type="text"
+					withAsterisk
 				/>
 				<TextInput
 					label="Фамилия:"
@@ -19,12 +20,14 @@ const CartContactBlock = () => {
 				<TextInput
 					label="E-Mail:"
 					type="email"
+					withAsterisk
 				/>
 				<InputBase
 					label="Телефон:"
 					component={IMaskInput}
 					mask="+7 (000) 000-0000"
 					placeholder="+7 (999) 999-9999"
+					withAsterisk
 				/>
 			</div>
 		</div>

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 
 export const revalidate = 3600
 
-export async function GET(request: Request) {
+export async function GET() {
 	const ingredients = await prisma.ingredient.findMany({
 		select: {
 			id: true,

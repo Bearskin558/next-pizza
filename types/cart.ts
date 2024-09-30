@@ -1,5 +1,4 @@
 import { CartItem, PizzaSize } from "@prisma/client"
-import { Ingredient, Pizza } from "./pizzas"
 
 export interface Cart {
 	id: string

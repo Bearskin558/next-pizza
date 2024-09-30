@@ -12,7 +12,7 @@ interface Props {
 	disabled?: boolean
 }
 
-const CartItemButton = ({ Icon, onClick, className, variant = "outline", disabled = false }: Props) => {
+const CartItemButton = ({ Icon, onClick, className, variant = "transparent", disabled = false }: Props) => {
 	const classNames = clsx(className, styles.cartItemButton)
 	const [isLoading, setIsLoading] = useState(false)
 	const onClickHanler = async () => {

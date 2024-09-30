@@ -2,3 +2,9 @@
 	width: 35px;
 	height: 35px;
 }
+@media (max-width: 768px) {
+	.cartItemButton {
+		width: 25px;
+		height: 25px;
+	}
+}

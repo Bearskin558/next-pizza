@@ -1,15 +1,31 @@
 .wrapper {
 	display: flex;
-	gap: 30px;
+	gap: 20px;
 	background-color: #303030;
 	padding: 30px;
 	border-radius: 20px;
+	flex-direction: column;
 }
 
 .names,
 .contacts {
 	display: flex;
-	flex-direction: column;
 	flex-grow: 1;
-	gap: 10px;
+	gap: 50px;
+	justify-content: space-between;
+	& > div {
+		flex-grow: 1;
+	}
+}
+@media (max-width: 768px) {
+	.wrapper {
+		padding: 20px;
+		gap: 10px;
+		padding: 15px;
+	}
+	.names,
+	.contacts {
+		flex-direction: column;
+		gap: 10px;
+	}
 }
