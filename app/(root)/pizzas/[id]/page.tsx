@@ -8,8 +8,6 @@ import { redirect } from "next/navigation"
 import React from "react"
 import { Colors } from "@/constants/colors"
 
-export const revalidate = 3600
-
 export async function generateStaticParams() {
 	const response = await getAllPizzas()
 	return response.data.map(item => ({
