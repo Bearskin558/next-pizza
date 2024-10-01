@@ -56,7 +56,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
 	const token = req.cookies.get("authjs.session-token")
-	console.log(cookies)
+	console.log(cookies())
 	if (!token) return NextResponse.json("Пользователь не авторизован", { status: 401 })
 	const requestData = await req.json()
 	if (!isCartItemRequestPostData(requestData)) return NextResponse.json("Bad request", { status: 400 })
