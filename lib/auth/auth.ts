@@ -11,8 +11,8 @@ export const authConfig: NextAuthConfig = {
 			clientSecret: process.env.GOOGLE_SECRET,
 		}),
 		GithubProvider({
-			clientId: process.env.GITHUB_CLIENT_ID,
-			clientSecret: process.env.GITHUB_SECRET,
+			clientId: process.env.CLIENT_ID_GITHUB,
+			clientSecret: process.env.SECRET_GITHUB,
 		}),
 	],
 	adapter: PrismaAdapter(prisma),
