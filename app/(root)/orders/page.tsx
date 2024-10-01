@@ -17,7 +17,7 @@ export const revalidate = 0
 export default async function Orders() {
 	const session = await auth()
 	const cookiesStore = cookies()
-	const token = cookiesStore.get("authjs.session-token")
+	const token = cookiesStore.get("__Secure-authjs.session-token")
 	if (!session || !token?.value) redirect("/")
 	const orders = await getAllOrders(token.value)
 	return (
