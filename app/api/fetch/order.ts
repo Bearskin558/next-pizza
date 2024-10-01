@@ -6,7 +6,7 @@ export const getAllOrders = async (token: string) =>
 		next: { revalidate: 0 },
 		credentials: "include",
 		headers: {
-			Cookie: `authjs.session-token=${token}`,
+			Cookie: `__Secure-authjs.session-token=${token}`,
 		},
 	})
 export const createOrder = async (order: OrderPostRequestData) =>

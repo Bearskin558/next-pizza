@@ -19,22 +19,23 @@ export default async function Orders() {
 	const cookiesStore = cookies()
 	const token = cookiesStore.get("__Secure-authjs.session-token")
 	if (!session || !token?.value) redirect("/")
-	const orders = await getAllOrders(token.value)
-	return (
-		<main>
-			<div className="container">
-				{orders.data.length > 0 && (
-					<div className={styles.ordersWrapper}>
-						{orders.data.map(item => (
-							<Order
-								order={item}
-								key={item.id}
-							/>
-						))}
-					</div>
-				)}
-				{orders.data.length === 0 && <EmptyOrders />}
-			</div>
-		</main>
-	)
+	const response = await getAllOrders(token.value)
+	if (response.status === 200)
+		return (
+			<main>
+				<div className="container">
+					{response.data.length > 0 && (
+						<div className={styles.ordersWrapper}>
+							{response.data.map(item => (
+								<Order
+									order={item}
+									key={item.id}
+								/>
+							))}
+						</div>
+					)}
+					{response.data.length === 0 && <EmptyOrders />}
+				</div>
+			</main>
+		)
 }
