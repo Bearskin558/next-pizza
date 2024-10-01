@@ -7,7 +7,7 @@ import { cartItemsDto } from "../../cartItemsDto/cartItemsDto"
 export const revalidate = 0
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-	const token = req.cookies.get("authjs.session-token")
+	const token = req.cookies.get("__Secure-authjs.session-token")
 	if (!token) return NextResponse.json("Пользователь не авторизован", { status: 401 })
 
 	try {
@@ -41,7 +41,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 }
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-	const token = req.cookies.get("authjs.session-token")
+	const token = req.cookies.get("__Secure-authjs.session-token")
 	if (!token) return NextResponse.json("Пользователь не авторизован", { status: 401 })
 	const requestData = await req.json()
 	if (!isRequestDataToEditCountCartItem(requestData)) return NextResponse.json("Bad request", { status: 400 })
