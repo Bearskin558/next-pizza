@@ -1,5 +1,4 @@
 import { Skeleton } from "@mantine/core"
-import { motion } from "framer-motion"
 import styles from "./IngredientSkeleton.module.css"
 
 const IngredientSkeleton = () => {

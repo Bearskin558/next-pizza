@@ -1,7 +1,6 @@
 import { Pizza } from "@/types/pizzas"
-import { Box, Button, Skeleton, Text } from "@mantine/core"
+import { Box, Button, Text } from "@mantine/core"
 import { Add01Icon } from "hugeicons-react"
-import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"

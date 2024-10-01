@@ -3,7 +3,6 @@
 import { deleteCartItem, patchCartItem } from "@/app/api/fetch/cartItem"
 import { useCartStore } from "@/shared/store/cartStore"
 import { CartItemResponse } from "@/types/cart"
-import { ActionIcon } from "@mantine/core"
 import { MinusSignIcon, MultiplicationSignIcon, PlusSignIcon } from "hugeicons-react"
 import Image from "next/image"
 import CartItemButton from "../CartItemButton/CartItemButton"

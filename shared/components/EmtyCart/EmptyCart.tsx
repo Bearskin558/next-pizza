@@ -1,4 +1,4 @@
-import { Sad01Icon, Sad02Icon, ShoppingCart01Icon } from "hugeicons-react"
+import { Sad02Icon, ShoppingCart01Icon } from "hugeicons-react"
 import styles from "./EmptyCart.module.scss"
 
 const EmptyCart = () => {

@@ -1,7 +1,6 @@
 import { PizzaSizeName } from "@/types/pizzas"
 import isPizzaSize from "@/utils/isPizzaSize"
 import { SegmentedControl } from "@mantine/core"
-import styles from "./PizzaSizeControl.module.scss"
 
 interface Props {
 	value: PizzaSizeName

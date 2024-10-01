@@ -2,7 +2,7 @@
 
 import { searchPizzas } from "@/app/api/fetch/pizza"
 import { Pizza } from "@/types/pizzas"
-import { ActionIcon, Button, CloseButton, Loader, TextInput } from "@mantine/core"
+import { CloseButton, Loader, TextInput } from "@mantine/core"
 import { useToggle } from "@siberiacancode/reactuse"
 import clsx from "clsx"
 import { Search02Icon } from "hugeicons-react"
@@ -19,6 +19,7 @@ const Search = () => {
 	const [isFocused, toggleIsFocused] = useToggle([false, true])
 	const [searchValue, setSearchValue] = useState("")
 	const [isLoading, setIsLoading] = useState(false)
+	const [isVisibleEmtyMessage, setIsVisibleEmtyMessage] = useState(false)
 	const [filteredPizzas, setFilteredPizzas] = useState<Pizza[]>([])
 	const [visibleSearchInput, setVisibleSearchInput] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)
@@ -36,6 +37,7 @@ const Search = () => {
 			if (searchValue.length === 0) return setFilteredPizzas([])
 			setIsLoading(true)
 			const pizzas = (await searchPizzas(searchValue)).data
+			if (pizzas.length === 0) setIsVisibleEmtyMessage(true)
 			setFilteredPizzas(pizzas)
 			setIsLoading(false)
 		}, 300),
@@ -43,17 +45,20 @@ const Search = () => {
 	)
 
 	const onChangeHandler = (value: string) => {
+		setIsVisibleEmtyMessage(false)
 		setSearchValue(value)
 		debounceSearchPizzas(value)
 	}
 
 	const resetHandler = () => {
+		setIsVisibleEmtyMessage(false)
 		setSearchValue("")
 		setFilteredPizzas([])
 		setIsLoading(false)
 	}
 
 	const onBlurHandler = () => {
+		setIsVisibleEmtyMessage(false)
 		toggleIsFocused(false)
 		setSearchValue("")
 		setFilteredPizzas([])
@@ -126,6 +131,11 @@ const Search = () => {
 									onClickHandler={onBlurHandler}
 								/>
 							))}
+						</div>
+					)}
+					{isVisibleEmtyMessage && (
+						<div className={styles.pizzasCards}>
+							<p className={styles.notFoundMessage}>Ничего не найдено</p>
 						</div>
 					)}
 				</div>

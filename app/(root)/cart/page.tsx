@@ -1,6 +1,4 @@
-import { getCart } from "@/app/api/fetch/cart"
 import CartPage from "@/shared/components/CartPage/CartPage"
-import { cookies } from "next/headers"
 
 export const generateMetadata = async () => {
 	return {
@@ -10,9 +8,12 @@ export const generateMetadata = async () => {
 
 const Cart = () => {
 	return (
-		<div className="container">
-			<CartPage />
-		</div>
+		<main>
+			{" "}
+			<div className="container">
+				<CartPage />
+			</div>
+		</main>
 	)
 }
 

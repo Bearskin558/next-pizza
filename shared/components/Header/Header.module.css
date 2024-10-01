@@ -4,7 +4,6 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: clamp(10px, 2vw, 100px);
-	margin-bottom: clamp(15px, 3vw, 40px);
 }
 .btnBlock {
 	display: flex;

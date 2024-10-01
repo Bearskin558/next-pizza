@@ -12,26 +12,28 @@ const CurrentPizzaPage = async ({ params: { id } }: { params: { id: string } }) 
 	const ingredients = (await getAllIngredients()).data
 	if (pizza)
 		return (
-			<div className="container">
-				<Link href="/">
-					<Button
-						variant="outline"
-						size="md"
-						leftSection={
-							<LinkBackwardIcon
-								color={Colors.ACCENT}
-								size={30}
-							/>
-						}
-					>
-						<Text size="md">Все пиццы</Text>
-					</Button>
-				</Link>
-				<PizzaPage
-					pizza={pizza}
-					ingredients={ingredients}
-				/>
-			</div>
+			<main>
+				<div className="container">
+					<Link href="/">
+						<Button
+							variant="outline"
+							size="md"
+							leftSection={
+								<LinkBackwardIcon
+									color={Colors.ACCENT}
+									size={30}
+								/>
+							}
+						>
+							<Text size="md">Все пиццы</Text>
+						</Button>
+					</Link>
+					<PizzaPage
+						pizza={pizza}
+						ingredients={ingredients}
+					/>
+				</div>
+			</main>
 		)
 }
 

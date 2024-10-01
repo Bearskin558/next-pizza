@@ -1,0 +1,25 @@
+.footer {
+	height: 40px;
+	background-color: #2e2e2e;
+	display: flex;
+	justify-content: flex-start;
+	font-size: 18px;
+}
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+	gap: 10px;
+}
+.linkContainer {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+@media (max-width: 768px) {
+	.footer {
+		font-size: 14px;
+	}
+}

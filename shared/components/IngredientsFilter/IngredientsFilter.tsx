@@ -1,11 +1,11 @@
 "use client"
 
 import { useIngredientsStore } from "@/shared/store/ingredients"
-import { Button, Checkbox, Skeleton, Text } from "@mantine/core"
-import { AnimatePresence, motion } from "framer-motion"
+import { Button, Checkbox, Text } from "@mantine/core"
+import { AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
+import IngredientSkeleton from "../IngredientSkeleton/IngredientSkeleton"
 import IngredientItem from "./IngredientItem"
-import IngredientSkeleton from "./IngredientSkeleton/IngredientSkeleton"
 import styles from "./IngredientsFilter.module.css"
 
 interface Props {

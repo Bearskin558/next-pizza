@@ -13,12 +13,12 @@
 		height: 100%;
 		font-weight: 700;
 	}
-	// scrollbar-color: var(--accent-color) #1a1a1a;
 }
 @media (max-width: 768px) {
 	.categories {
-		margin-bottom: 10px;
+		height: 50px;
 		overflow-x: scroll;
+		align-items: center;
 		& > span {
 			display: none;
 		}

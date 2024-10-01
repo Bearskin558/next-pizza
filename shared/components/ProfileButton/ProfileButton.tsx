@@ -1,10 +1,9 @@
 "use client"
 
-import { ActionIcon, Avatar, Button, Menu, MenuDropdown, MenuItem, MenuTarget } from "@mantine/core"
+import { ActionIcon, Menu, MenuDropdown, MenuItem, MenuTarget } from "@mantine/core"
 import { BorderFullIcon, LogoutCircle02Icon } from "hugeicons-react"
 import { signOut } from "next-auth/react"
 import Image from "next/image"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import styles from "./ProfileButton.module.scss"
 

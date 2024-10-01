@@ -1,8 +1,7 @@
 "use client"
 
-import { Input, RangeSlider, RangeSliderValue, Slider, Text, Title } from "@mantine/core"
-import { debounce } from "lodash"
-import { ChangeEvent, useState } from "react"
+import { Input, RangeSlider, RangeSliderValue, Text } from "@mantine/core"
+import { ChangeEvent } from "react"
 import styles from "./PriceFilter.module.css"
 
 interface Props {

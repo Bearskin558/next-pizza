@@ -16,14 +16,6 @@ export const authConfig: NextAuthConfig = {
 		}),
 	],
 	adapter: PrismaAdapter(prisma),
-	// callbacks: {
-	// 	authorized: async ({ auth }) => {
-	// 		return !!auth //редирект на страницу аутентификации для приватных роутов
-	// 	},
-	// },
-	// pages: {
-	// 	signIn: "/signin",
-	// },
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth(authConfig)

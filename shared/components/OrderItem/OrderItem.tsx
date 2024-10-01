@@ -9,20 +9,27 @@ interface Props {
 const OrderItem = ({ orderItem }: Props) => {
 	return (
 		<div className={styles.wrapper}>
-			<Image
-				src={orderItem.pizza.imageUrl}
-				width={65}
-				height={65}
-				alt={orderItem.pizza.name}
-			/>
 			<div className={styles.textBlock}>
-				<p>{orderItem.pizza.name}</p>
-				{orderItem.toppings.length > 0 && (
-					<p>{`Дополнительные ингредиенты: ${orderItem.toppings.map(item => item.name).join(", ")}`}</p>
-				)}
+				<Image
+					src={orderItem.pizza.imageUrl}
+					width={65}
+					height={65}
+					alt={orderItem.pizza.name}
+				/>
+				<div>
+					<p>{orderItem.pizza.name}</p>
+					{orderItem.toppings.length > 0 && (
+						<div>
+							<p>Дополнительные ингредиенты:</p>
+							<p>{orderItem.toppings.map(item => item.name).join(", ")}</p>
+						</div>
+					)}
+				</div>
 			</div>
-			<p className={styles.count}>{orderItem.count} шт.</p>
-			<p className={styles.price}>{orderItem.price} ₽</p>
+			<div>
+				<p className={styles.count}>{orderItem.count} шт.</p>
+				<p className={styles.price}>{orderItem.price} ₽</p>
+			</div>
 		</div>
 	)
 }

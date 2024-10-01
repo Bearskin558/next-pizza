@@ -1,6 +1,5 @@
 import { DoughValue } from "@/types/pizzas"
 import { SegmentedControl } from "@mantine/core"
-import styles from "./DoughControl.module.scss"
 
 interface DoughData {
 	label: string

@@ -55,6 +55,9 @@
 .searchButton {
 	display: none;
 }
+.notFoundMessage {
+	position: relative;
+}
 @media (max-width: 768px) {
 	.blur {
 		background-color: rgba(0, 0, 0, 0.3);

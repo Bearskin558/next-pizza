@@ -36,7 +36,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	// flex-grow: 1;
+	width: 70px;
 	font-size: 18px;
 }
 .buttonBlock {
@@ -50,6 +50,9 @@
 	display: flex;
 	align-items: center;
 	gap: 10px;
+	& > p {
+		width: 40px;
+	}
 }
 .count {
 	width: 20px;

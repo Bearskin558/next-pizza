@@ -1,3 +1,4 @@
+import Footer from "@/shared/components/Footer/Footer"
 import Header from "@/shared/components/Header"
 import React, { ReactNode } from "react"
 
@@ -7,6 +8,7 @@ const HomeLayout = ({ children, modal }: { children: ReactNode; modal: ReactNode
 			<Header />
 			{children}
 			{modal}
+			<Footer />
 		</>
 	)
 }
