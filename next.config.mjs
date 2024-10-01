@@ -8,6 +8,9 @@ const nextConfig = {
 			static: 10,
 			dynamic: 10,
 		},
+		serverActions: {
+			allowedOrigins: ["next-pizza-two-black.vercel.app", "localhost:3000"],
+		},
 	},
 	images: {
 		remotePatterns: [
