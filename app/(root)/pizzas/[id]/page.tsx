@@ -10,14 +10,14 @@ import { Colors } from "@/constants/colors"
 
 export const revalidate = 3600
 
-export async function generateStaticParams() {
-	const response = await getAllPizzas()
-	return response.data.map(item => ({
-		params: {
-			id: item.id,
-		},
-	}))
-}
+// export async function generateStaticParams() {
+// 	const response = await getAllPizzas()
+// 	return response.data.map(item => ({
+// 		params: {
+// 			id: item.id,
+// 		},
+// 	}))
+// }
 
 const CurrentPizzaPage = async ({ params: { id } }: { params: { id: string } }) => {
 	const pizza = (await getPizzaById(id)).data
