@@ -1,5 +1,6 @@
 import { getAllOrders } from "@/app/api/fetch/order"
 import { auth } from "@/lib/auth/auth"
+import EmptyOrders from "@/shared/components/EmtyOrders/EmptyOrders"
 import Order from "@/shared/components/Order/Order"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
@@ -22,14 +23,17 @@ export default async function Orders() {
 	return (
 		<main>
 			<div className="container">
-				<div className={styles.ordersWrapper}>
-					{orders.data.map(item => (
-						<Order
-							order={item}
-							key={item.id}
-						/>
-					))}
-				</div>
+				{orders.data.length > 0 && (
+					<div className={styles.ordersWrapper}>
+						{orders.data.map(item => (
+							<Order
+								order={item}
+								key={item.id}
+							/>
+						))}
+					</div>
+				)}
+				{orders.data.length === 0 && <EmptyOrders />}
 			</div>
 		</main>
 	)

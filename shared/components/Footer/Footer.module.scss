@@ -1,9 +1,18 @@
 .footer {
-	height: 40px;
-	background-color: #2e2e2e;
+	height: 50px;
 	display: flex;
 	justify-content: flex-start;
 	font-size: 18px;
+	position: relative;
+	&::before {
+		content: "";
+		width: 100vw;
+		height: 1px;
+		position: absolute;
+		background-color: #383838;
+		left: 0px;
+		top: 0px;
+	}
 }
 .wrapper {
 	display: flex;

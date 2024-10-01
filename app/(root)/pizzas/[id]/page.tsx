@@ -1,16 +1,28 @@
 import { getAllIngredients } from "@/app/api/fetch/getAllIngredients"
-import { getPizzaById } from "@/app/api/fetch/pizza"
+import { getAllPizzas, getPizzaById } from "@/app/api/fetch/pizza"
 import PizzaPage from "@/shared/components/PizzaPage/PizzaPage"
 import { Button, Text } from "@mantine/core"
 import { LinkBackwardIcon } from "hugeicons-react"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 import React from "react"
 import { Colors } from "@/constants/colors"
+
+export const revalidate = 3600
+
+export async function generateStaticParams() {
+	const response = await getAllPizzas()
+	return response.data.map(item => ({
+		params: {
+			id: item.id,
+		},
+	}))
+}
 
 const CurrentPizzaPage = async ({ params: { id } }: { params: { id: string } }) => {
 	const pizza = (await getPizzaById(id)).data
 	const ingredients = (await getAllIngredients()).data
-	if (pizza)
+	if (pizza) {
 		return (
 			<main>
 				<div className="container">
@@ -35,6 +47,9 @@ const CurrentPizzaPage = async ({ params: { id } }: { params: { id: string } }) 
 				</div>
 			</main>
 		)
+	} else {
+		redirect("/")
+	}
 }
 
 export default CurrentPizzaPage

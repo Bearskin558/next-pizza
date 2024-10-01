@@ -6,6 +6,8 @@ import { getAllIngredients } from "../api/fetch/getAllIngredients"
 import { getAllPizzas } from "../api/fetch/pizza"
 import styles from "./page.module.css"
 
+export const revalidate = 3600
+
 export default async function Home() {
 	const { data: ingredients } = await getAllIngredients()
 	const { data: pizzas } = await getAllPizzas()

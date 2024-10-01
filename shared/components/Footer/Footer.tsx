@@ -1,4 +1,3 @@
-import { Button } from "@mantine/core"
 import { TelegramIcon } from "hugeicons-react"
 import styles from "./Footer.module.scss"
 
