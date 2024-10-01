@@ -2,8 +2,8 @@ import { hostname } from "os"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	// output: "export",
-	// basePath: "/next-pizza",
+	output: "export",
+	basePath: "/next-pizza",
 	experimental: {
 		optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
 		staleTimes: {
