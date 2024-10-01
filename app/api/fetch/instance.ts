@@ -48,4 +48,5 @@ class HttpClient {
 	}
 }
 
-export const api = new HttpClient(process.env.NEXT_API_URL || "http://localhost:3000/api")
+// export const api = new HttpClient(process.env.NEXT_API_URL || "http://localhost:3000/api")
+export const api = new HttpClient("https://next-pizza-two-black.vercel.app/api")
