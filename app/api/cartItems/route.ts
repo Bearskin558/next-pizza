@@ -1,6 +1,7 @@
 import { prisma } from "@/prisma/prisma-client"
 import { CartItemResponse } from "@/types/cart"
 import { isCartItemRequestPostData } from "@/utils/isCartItemRequestData"
+import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 import { cartItemsDto } from "../cartItemsDto/cartItemsDto"
 
@@ -55,6 +56,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
 	const token = req.cookies.get("authjs.session-token")
+	console.log(cookies)
 	if (!token) return NextResponse.json("Пользователь не авторизован", { status: 401 })
 	const requestData = await req.json()
 	if (!isCartItemRequestPostData(requestData)) return NextResponse.json("Bad request", { status: 400 })

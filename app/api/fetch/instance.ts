@@ -18,6 +18,7 @@ class HttpClient {
 			method,
 			...config,
 			...(body && { body: JSON.stringify(body) }),
+			credentials: "include",
 		})
 		return {
 			success: response.ok,
